@@ -1,0 +1,27 @@
+<%# Display the list of outfits for the current user %>
+
+<div class="container text-center mt-3">
+<h1 class="mt-3 mb-3">Your Outfits</h1>
+
+<% if @outfits.empty? %>
+  <p>You have no outfits yet. <%= link_to 'Create a new outfit', new_outfit_path %></p>
+<% else %>
+  <div class="outfit-cards text-left">
+    <% @outfits.each do |outfit| %>
+      <%= render 'outfit_card', outfit: outfit %>
+    <% end %>
+<% end %>
+</div>
+
+ <h2 class="mt-3 mb-3">Your Products</h2>
+  <% if @closet_items.empty? %>
+    <p>Your closet is empty. <%= link_to 'Add products to your closet', products_path %></p>
+  <% else %>
+    <div class="product-cards mb-5">
+      <% @closet_items.each do |closet_item| %>
+    <%= render 'product_card', closet_item: closet_item %>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>

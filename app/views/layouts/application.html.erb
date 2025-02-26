@@ -10,36 +10,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
-  <div class="container-fluid d-flex justify-content-around">
-
-    <a class="nav-link text-center" href="#">
-      <i class="bi bi-house-door fs-4"></i>
-      <div class="small">Home</div>
-    </a>
-
-    <a class="nav-link text-center" href="#">
-      <i class="bi bi-shop fs-4"></i>
-      <div class="small">Closet</div>
-    </a>
-
-    <a class="nav-link text-center" href="#">
-      <i class="bi bi-search fs-4"></i>
-      <div class="small">Search</div>
-    </a>
-
-    <a class="nav-link text-center" href="#">
-      <i class="bi bi-person fs-4"></i>
-      <div class="small">Profile</div>
-    </a>
-
-  </div>
-</nav>
-
-
-
-
 <%= render "shared/flashes" %>
+<%= render "shared/navbar" %>
 
     <%= yield %>
   </body>
