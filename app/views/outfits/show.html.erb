@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center justify-content-between padding: 20px; min-height: 100vh;" style="color: white; padding: 20px; min-height: 100vh;">
+  <% @outfit.products.each do |product| %>
+     <div class="outfit-product-image">
+        <%= image_tag(product.image, class: "img-fluid", alt: product.name) %>
+      </div>
+   <% end %>
+</div>
