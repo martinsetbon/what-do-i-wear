@@ -1,19 +1,15 @@
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
   <div class="container-fluid d-flex justify-content-around">
 
-    <a class="nav-link text-center" href="#">
+    <%= link_to root_path, class: "nav-link text-center" do%>
       <i class="bi bi-house-door fs-4"></i>
       <div class="small">Home</div>
-    </a>
+    <% end %>
 
-      <%= link_to 'Closet', outfits_path, class: 'small nav-link text-center' %>
-
-
-    <a class="nav-link text-center" href="#">
-      <i class="bi bi-search fs-4"></i>
-      <div class="small">Search</div>
-    </a>
+    <%= link_to outfits_path, class: 'nav-link text-center' do %>
+      <i class="bi bi-bag fs-4"></i>
+      <div class="small">Closet</div>
+    <% end %>
 
     <a class="nav-link text-center" href="#">
       <i class="bi bi-person fs-4"></i>
