@@ -1,0 +1,60 @@
+<div class="show-container text-center container mt-3">
+  <div class="card mx-auto" style="max-width: 384px;">
+    <div class="aspect-ratio aspect-ratio-1x1">
+      <%= cl_image_tag(@outfit.photo.key, class: "img-fluid", width: "384") %>
+
+    <div class="outfit-details text-center mt-3">
+      <%= simple_form_for @outfit do |f| %>
+        <div class="container mt-1">
+
+          <!-- Top Row -->
+          <div class="row justify-content-center mb-3">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Top A" %>
+              </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Top B" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row -->
+          <div class="row justify-content-center mb-3">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Bottom A" %>
+              </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Bottom B" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shoes Row -->
+          <div class="row justify-content-center mb-3">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Shoes A" %>
+              </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
+                <%= f.label :photo, "Shoes B" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <%= f.submit 'Save', class: 'btn btn-success btn-lg m-3' %>
+
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

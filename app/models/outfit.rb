@@ -1,9 +1,8 @@
 class Outfit < ApplicationRecord
   belongs_to :user
+  has_one_attached :photo
   has_many :outfit_products
   has_many :products, through: :outfit_products
-
-  validates :name, presence: true
 
   # Optional fields
   validates :budget, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true

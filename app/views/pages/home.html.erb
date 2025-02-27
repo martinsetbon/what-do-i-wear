@@ -2,7 +2,9 @@
   <div class="background-image-home">
     <h1 class="title-home">What do I wear?</h1>
     <div class="buttons-home">
-      <button class="btn-home upload-btn">Upload</button>
+      <%= link_to new_outfit_path, class: "btn-home upload-btn" do %>
+        Upload
+      <% end %>
       <button class="btn-home generate-btn">Generate</button>
     </div>
   </div>
