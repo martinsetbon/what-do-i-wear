@@ -1,16 +1,27 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 require "open-uri"
+
+# Destroy existing records to avoid duplication
+OutfitProduct.destroy_all
+puts "Outfit products deleted"
+Outfit.destroy_all
+puts "Outfits deleted"
 Product.destroy_all
-Product.create!([
+puts "Products deleted"
+ClosetItem.destroy_all
+puts "Closet items deleted"
+User.destroy_all
+puts "Users deleted"
+
+# Create some users
+users = User.create!([
+  { email: 'user1@example.com', password: 'password123' },
+  { email: 'user2@example.com', password: 'password123' },
+  { email: 'user3@example.com', password: 'password123' }
+])
+puts "Users created"
+
+# Create products
+products = Product.create!([
   # tops
   {
     name: "Womens Cotton Relaxed Shirt",
@@ -57,7 +68,7 @@ Product.create!([
     url: "https://www2.hm.com/en_jp/productpage.1108349001.html"
   },
 
-  # Shoes
+  # shoes
   {
     name: "Nike Air Force 1 07",
     price: 13200.00,
@@ -77,8 +88,38 @@ Product.create!([
     name: "H&M Strappy Sandals",
     price: 3999.00,
     product_type: "shoes",
-    image: "https://lp2.hm.com/hmgoepprod?set=quality%255B79%255D%252Csource%255B%252Fed%252Fe5%252Fede5d9b5c2e77a1fbe17a092f1ad512f2f5dc519.jpg%255D%252Corigin%255Bdam%255D%252Ccategory%255B%255D%252Ctype%255BDESCRIPTIVESTILLLIFE%255D%252Cres%255Bm%255D%252Chmver%255B2%255D&call=url%5Bfile:/product/main%5D",
+    image: "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/6e862b7937c99445e5e1d307966b88f933f655f4_xxl-1.jpg",
     url: "https://www2.hm.com/en_jp/productpage.1102339002.html"
   }
 ])
-puts "seeds created"
+puts "Products created"
+
+# Now, assign products to users' closet items and outfits
+
+users.each do |user|
+  # Closet items: 1 random item from each type
+  %w(top bottom shoes).each do |type|
+    product = Product.where(product_type: type).sample
+    ClosetItem.create!(user: user, product: product)
+  end
+
+  # Create outfits for each user
+  2.times do  # Create 2 outfits per user
+    outfit = Outfit.create!(
+      user: user,
+      name: Faker::Lorem.words(number: 2).join(' '),
+      budget: rand(1000..5000),
+      season: %w(summer fall winter spring).sample,
+      style: %w(casual formal).sample,
+      gender: %w(male female unisex).sample
+    )
+
+    # Add 1 random product per type to the outfit
+    %w(top bottom shoes).each do |type|
+      product = Product.where(product_type: type).sample
+      OutfitProduct.create!(outfit: outfit, product: product)
+    end
+  end
+end
+
+puts "Seeds created successfully"

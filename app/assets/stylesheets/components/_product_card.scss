@@ -1,0 +1,89 @@
+.product-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .product-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .product-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .product-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .product-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .product-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.product-card {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+
+  p{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+
+    a{
+    padding: 4px 8px 4px 8px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+  }
+
+}
+
+
+
+.product-image {
+  width: 100px;  /* Set the width of the image container */
+  height: 100px; /* Set the height of the image container */
+  overflow: hidden;  /* Hide any overflow that goes outside the container */
+  border-radius: 50%; /* Optional: round the corners */
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* This will make the image fill the container and crop if needed */
+}
+
+.product-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.product-price {
+  margin-top: 5px;
+}
+
+
+.product-infos{
+  width: 70%;
+}

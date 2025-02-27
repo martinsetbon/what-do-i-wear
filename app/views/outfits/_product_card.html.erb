@@ -1,0 +1,13 @@
+<div class="product-card d-flex rounded-pill">
+  <div class="product-image">
+    <%= image_tag closet_item.product.image, class: "product-image", alt: closet_item.product.name %>
+  </div>
+  <div class="product-infos text-left">
+    <p class="product-name"><%= closet_item.product.name %></p>
+    <hr class="mt-0 mb-0">
+    <div class="d-flex justify-content-between mt-2 pe-3">
+      <p class="product-price"><%= number_to_currency(closet_item.product.price, {unit: '¥', precision: 0}) %></p>
+      <%= link_to 'Remove', outfits_path(closet_item), method: :delete, class: "rounded-pill", data: { confirm: 'Are you sure you want to delete this product from your closet?' } %>
+    </div>
+  </div>
+</div>
