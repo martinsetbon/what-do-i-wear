@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :outfits do
-    resources :outfit_products, only: [:create, :destroy]
+    resources :outfit_products, only: [:new, :create, :destroy]
   end
 
 
