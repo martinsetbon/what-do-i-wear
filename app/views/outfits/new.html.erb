@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
+<div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 112px);">
   <div class="background-image-home">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
@@ -6,59 +6,26 @@
 
           <!-- File upload for photo -->
           <div class="form-group">
-            <%= f.input :photo, as: :file, label: "Upload Photo", input_html: { class: "form-control" } %>
+            <!-- Custom button with Font Awesome icon -->
+            <%= f.label :photo, class: "btn btn-secondary d-flex align-items-center", for: "outfit_photo" do %>
+              <i class="fa-solid fa-image mr-3"></i> Upload
+            <% end %>
+
+            <!-- File input field -->
+            <%= f.input :photo, as: :file, input_html: { class: "d-none", id: "outfit_photo", onchange: "previewImage(event)" } %>
           </div>
 
-          <!-- Budget input field -->
-          <div class="form-group">
-            <%= f.label :budget, "Budget" %>
-            <%= f.number_field :budget, class: "form-control", step: "0.01", placeholder: "Enter budget" %>
-            <% if @outfit.errors[:budget].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:budget].first %>
-              </div>
-            <% end %>
-          </div>
-
-          <!-- Season selection -->
-          <div class="form-group">
-            <%= f.label :season, "Season" %>
-            <%= f.select :season, options_for_select([['Summer', 'summer'], ['Fall', 'fall'], ['Winter', 'winter'], ['Spring', 'spring']], @outfit.season), { prompt: "Select a season" }, class: "form-control" %>
-            <% if @outfit.errors[:season].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:season].first %>
-              </div>
-            <% end %>
-          </div>
-
-          <!-- Style selection -->
-          <div class="form-group">
-            <%= f.label :style, "Style" %>
-            <%= f.select :style, options_for_select([['Casual', 'casual'], ['Formal', 'formal']], @outfit.style), { prompt: "Select a style" }, class: "form-control" %>
-            <% if @outfit.errors[:style].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:style].first %>
-              </div>
-            <% end %>
-          </div>
-
-          <!-- Gender selection -->
-          <div class="form-group">
-            <%= f.label :gender, "Gender" %>
-            <%= f.select :gender, options_for_select([['Male', 'male'], ['Female', 'female'], ['Unisex', 'unisex']], @outfit.gender), { prompt: "Select a gender" }, class: "form-control" %>
-            <% if @outfit.errors[:gender].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:gender].first %>
-              </div>
-            <% end %>
+          <!-- Preview Image -->
+          <div class="form-group text-center">
+            <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail" style="display:none; max-width: 200px;"/>
           </div>
 
           <!-- Hidden field for user -->
           <%= f.hidden_field :user %>
 
           <!-- Submit button -->
-          <div class="form-group text-center mt-3">
-            <%= f.button :submit, "Create Outfit", class: "btn btn-primary" %>
+          <div class="form-group text-center mt-4">
+            <%= f.button :submit, "Create Outfit", class: "btn btn-success rounded-pill" %>
           </div>
 
         <% end %>
@@ -66,3 +33,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Function to preview the image when a file is selected
+  function previewImage(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    var preview = document.getElementById('image-preview');
+
+    // Check if a file is selected
+    if (file) {
+      reader.onload = function(e) {
+        preview.src = e.target.result; // Set the image source to the uploaded file
+        preview.style.display = "block"; // Show the image preview
+      };
+      reader.readAsDataURL(file); // Read the image file
+    }
+  }
+</script>

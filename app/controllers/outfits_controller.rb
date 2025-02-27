@@ -26,7 +26,7 @@ class OutfitsController < ApplicationController
     @product_bottom = OutfitProduct.new
     @product_shoes = OutfitProduct.new
   end
-  
+
   def index
     @outfits = current_user.outfits
     @closet_items = current_user.closet_items.includes(:product)
@@ -36,7 +36,7 @@ class OutfitsController < ApplicationController
 
   # Only allow the photo parameter in the outfit_params
   def outfit_params
-    params.require(:outfit).permit(:photo)
+    params.require(:outfit).permit(:photo, :season, :budget, :gender, :style)
   end
-  
+
 end
