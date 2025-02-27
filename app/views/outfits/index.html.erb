@@ -8,7 +8,9 @@
 <% else %>
   <div class="outfit-cards text-left">
     <% @outfits.each do |outfit| %>
-      <%= render 'outfit_card', outfit: outfit %>
+      <%= link_to outfit_path(outfit), class: "outfit-card-link" do %>
+        <%= render 'outfit_card', outfit: outfit %>
+      <% end %>
     <% end %>
 <% end %>
 </div>

@@ -19,6 +19,7 @@ class OutfitsController < ApplicationController
     end
   end
 
+
   def edit
     @outfit = Outfit.find(params[:id])
     @outfit.user = current_user
