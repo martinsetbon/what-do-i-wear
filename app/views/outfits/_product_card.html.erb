@@ -1,6 +1,6 @@
 <div class="product-card d-flex rounded-pill">
   <div class="product-image">
-  <%= link_to closet_item.product.url, target: "_blank" do %>
+  <%= link_to closet_item.product.link_url, target: "_blank" do %>
     <%= image_tag closet_item.product.image, class: "product-image", alt: closet_item.product.name %>
     <% end %>
   </div>
