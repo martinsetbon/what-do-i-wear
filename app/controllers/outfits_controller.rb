@@ -57,7 +57,6 @@ class OutfitsController < ApplicationController
     @outfit_product_bottom = OutfitProduct.create(outfit: @outfit, product: @bottom_product)
     @shoe_product = Product.find(params[:shoe])
     @outfit_product_shoe = OutfitProduct.create(outfit: @outfit, product: @shoe_product)
-
     if @outfit.update(outfit_params)
       redirect_to outfits_path
     else
@@ -71,5 +70,4 @@ class OutfitsController < ApplicationController
   def outfit_params
     params.require(:outfit).permit(:photo, :name, :budget, :season, :style, :gender)
   end
-
 end
