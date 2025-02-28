@@ -9,13 +9,12 @@
     </div>
     <p class="card-title"><%= outfit.name %></p>
     <div class="d-flex justify-content-between">
-      <p class="card-description">Total Price: <%= number_to_currency(outfit.products.sum(&:price), {unit: '¥', precision: 0}) %></p>
+      <p class="card-description">Total Price: <%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></p>
       <p class="card-description"><%= outfit.season&.capitalize %></p>
     </div>
     <div class="d-flex justify-content-between">
       <p class="card-description"><%= outfit.style&.capitalize %></p>
       <p class="card-description"><%= outfit.gender&.capitalize %></p>
-      <p class="card-description"><%= outfit.gender.capitalize %></p>
     </div>
     <%= link_to edit_outfit_path(outfit) do %>
       <i class="fa-solid fa-pen text-white"></i>

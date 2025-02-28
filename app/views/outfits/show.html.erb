@@ -8,7 +8,7 @@
           <%= image_tag(outfit_product.product.image, alt: outfit_product.product.name) %>
          <% end %>
         <p class="product-name"><%= outfit_product.product.name %></p>
-        <p class="product-price">¥<%= outfit_product.product.price %></p>
+        <p class="product-price">$<%= outfit_product.product.price %></p>
 
         <!-- Delete button -->
          <div class="delete-button-container">
@@ -21,7 +21,7 @@
     <% end %>
   </div>
 
-  <p class="total-price">Total: <%= number_to_currency(@outfit.products.sum(&:price), unit: '¥', precision: 0) %></p>
+  <p class="total-price">Total: <%= number_to_currency(@outfit.products.sum(&:price), unit: '$', precision: 0) %></p>
 
   <!-- Back Button -->
   <div class="back-button">

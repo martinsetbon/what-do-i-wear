@@ -61,9 +61,6 @@ def update
     redirect_to outfits_path
   else
     render :edit, status: :unprocessable_entity
-  def index
-    @outfits = current_user.outfits
-    @closet_items = current_user.closet_items.includes(:product)
   end
 end
 
@@ -72,7 +69,5 @@ end
   # Only allow the photo parameter in the outfit_params
   def outfit_params
     params.require(:outfit).permit(:photo, :name, :budget, :season, :style, :gender)
-    params.require(:outfit).permit(:photo, :season, :budget, :gender, :style)
   end
-
 end
