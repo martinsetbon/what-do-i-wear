@@ -48,17 +48,26 @@
   p{
     padding-bottom: 0px;
     margin-bottom: 0px;
+    color: black;
   }
 
     a{
-    padding: 4px 8px 4px 8px;
-    text-decoration: none;
-    background-color: black;
-    color: white;
+      text-decoration: none;
   }
 
 }
 
+
+.product-remove {
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+}
+
+.product-card-line{
+color: black;
+}
 
 
 .product-image {
@@ -66,6 +75,7 @@
   height: 100px; /* Set the height of the image container */
   overflow: hidden;  /* Hide any overflow that goes outside the container */
   border-radius: 50%; /* Optional: round the corners */
+  border: solid 1px black;
 }
 
 .product-image img {

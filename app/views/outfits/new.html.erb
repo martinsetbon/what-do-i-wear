@@ -3,64 +3,26 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
         <%= simple_form_for(@outfit) do |f| %>
-
           <!-- File upload for photo -->
           <div class="form-group">
             <%= f.input :photo, as: :file, label: "Upload Photo", input_html: { class: "form-control" } %>
           </div>
-
-          <!-- Budget input field -->
+          <!-- Outfit name field -->
           <div class="form-group">
-            <%= f.label :budget, "Budget" %>
-            <%= f.number_field :budget, class: "form-control", step: "0.01", placeholder: "Enter budget" %>
-            <% if @outfit.errors[:budget].any? %>
+            <%= f.label :name, "Name your outfit", class: "text-white" %>
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Enter outfit name', required: true %>
+            <% if @outfit.errors[:name].any? %>
               <div class="text-danger">
-                <%= @outfit.errors[:budget].first %>
+                <%= @outfit.errors[:name].join(", ") %>
               </div>
             <% end %>
           </div>
-
-          <!-- Season selection -->
-          <div class="form-group">
-            <%= f.label :season, "Season" %>
-            <%= f.select :season, options_for_select([['Summer', 'summer'], ['Fall', 'fall'], ['Winter', 'winter'], ['Spring', 'spring']], @outfit.season), { prompt: "Select a season" }, class: "form-control" %>
-            <% if @outfit.errors[:season].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:season].first %>
-              </div>
-            <% end %>
-          </div>
-
-          <!-- Style selection -->
-          <div class="form-group">
-            <%= f.label :style, "Style" %>
-            <%= f.select :style, options_for_select([['Casual', 'casual'], ['Formal', 'formal']], @outfit.style), { prompt: "Select a style" }, class: "form-control" %>
-            <% if @outfit.errors[:style].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:style].first %>
-              </div>
-            <% end %>
-          </div>
-
-          <!-- Gender selection -->
-          <div class="form-group">
-            <%= f.label :gender, "Gender" %>
-            <%= f.select :gender, options_for_select([['Male', 'male'], ['Female', 'female'], ['Unisex', 'unisex']], @outfit.gender), { prompt: "Select a gender" }, class: "form-control" %>
-            <% if @outfit.errors[:gender].any? %>
-              <div class="text-danger">
-                <%= @outfit.errors[:gender].first %>
-              </div>
-            <% end %>
-          </div>
-
           <!-- Hidden field for user -->
           <%= f.hidden_field :user %>
-
           <!-- Submit button -->
           <div class="form-group text-center mt-3">
             <%= f.button :submit, "Create Outfit", class: "btn btn-primary" %>
           </div>
-
         <% end %>
       </div>
     </div>
