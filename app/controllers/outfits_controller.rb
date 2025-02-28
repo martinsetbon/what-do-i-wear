@@ -19,6 +19,11 @@ class OutfitsController < ApplicationController
     end
   end
 
+  def destroy
+    @outfit = Outfit.find(params[:id])
+    @outfit.destroy
+    redirect_to outfits_path, notice: "Outfit deleted successfully."
+  end
 
   def edit
     @outfit = Outfit.find(params[:id])

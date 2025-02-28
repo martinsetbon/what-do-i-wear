@@ -2,11 +2,21 @@
   <h1>Outfit Details</h1>
 
   <div class="outfit-products">
-    <% @outfit.products.each do |product| %>
+    <% @outfit.outfit_products.each do |outfit_product| %>
       <div class="outfit-product-card">
-        <%= image_tag(product.image, alt: product.name) %>
-        <p class="product-name"><%= product.name %></p>
-        <p class="product-price">¥<%= product.price %></p>
+        <%= link_to outfit_product.product.url, target: "_blank" do %>
+          <%= image_tag(outfit_product.product.image, alt: outfit_product.product.name) %>
+         <% end %>
+        <p class="product-name"><%= outfit_product.product.name %></p>
+        <p class="product-price">¥<%= outfit_product.product.price %></p>
+
+        <!-- Delete button -->
+         <div class="delete-button-container">
+            <%= link_to "Remove", outfit_product_path(outfit_product),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+              class: "btn-remove"
+            %>
+          </div>
       </div>
     <% end %>
   </div>
