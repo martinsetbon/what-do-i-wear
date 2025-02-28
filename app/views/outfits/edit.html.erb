@@ -1,60 +1,83 @@
-<div class="show-container text-center container mt-3">
-  <div class="card mx-auto" style="max-width: 384px;">
-    <div class="aspect-ratio aspect-ratio-1x1">
-      <%= cl_image_tag(@outfit.photo.key, class: "img-fluid", width: "384") %>
-
-    <div class="outfit-details text-center mt-3">
-      <%= simple_form_for @outfit do |f| %>
-        <div class="container mt-1">
-
-          <!-- Top Row -->
-          <div class="row justify-content-center mb-3">
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Top A" %>
-              </div>
-            </div>
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Top B" %>
-              </div>
-            </div>
+<div class="container text-center mb-5">
+  <div class="upload-image-frame text-center">
+    <%= cl_image_tag(@outfit.photo.key, class: "img-fluid") %>
+  </div>
+  <h1><%= @outfit.name %></h1>
+  <hr>
+  <H2>Our selection from your picture</H2>
+  <p class="text-start small">select each piece that you want (left or right) and press the "save" button!</p>
+  <%= simple_form_for @outfit do |f| %>
+    <!-- Top Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="top" value="<%= @top_choice1.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @top_choice1&.image, class: "img-fluid" if @top_products.any? %>
           </div>
-
-          <!-- Bottom Row -->
-          <div class="row justify-content-center mb-3">
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Bottom A" %>
-              </div>
-            </div>
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Bottom B" %>
-              </div>
-            </div>
+        </label>
+        <p>¥<%= @top_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="top" value="<%= @top_choice2.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @top_choice2&.image, class: "img-fluid" if @top_products.length > 1 %>
           </div>
-
-          <!-- Shoes Row -->
-          <div class="row justify-content-center mb-3">
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Shoes A" %>
-              </div>
-            </div>
-            <div class="col-6 d-flex justify-content-center">
-              <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 96px; width: 96px;">
-                <%= f.label :photo, "Shoes B" %>
-              </div>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <%= f.submit 'Save', class: 'btn btn-success btn-lg m-3' %>
-
-            <% end %>
-        </div>
+        </label>
+        <p>¥<%= @top_choice2.price %></p>
       </div>
     </div>
-  </div>
+    <!-- Bottom Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="bottom" value="<%= @bottom_products.first.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @bottom_choice1&.image, class: "img-fluid" if @bottom_products.any? %>
+          </div>
+        </label>
+        <p>¥<%= @bottom_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="bottom" value="<%= @bottom_products.second.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @bottom_choice2&.image, class: "img-fluid" if @bottom_products.length > 1 %>
+          </div>
+        </label>
+        <p>¥<%= @bottom_choice2.price %></p>
+      </div>
+    </div>
+    <!-- Shoe Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="shoe" value="<%= @shoe_products.first.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @shoe_choice1&.image, class: "img-fluid" if @shoe_products.any? %>
+          </div>
+        </label>
+        <p>¥<%= @shoe_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="shoe" value="<%= @shoe_products.second.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @shoe_choice2&.image, class: "img-fluid" if @shoe_products.length > 1 %>
+          </div>
+        </label>
+        <p>¥<%= @shoe_choice2.price %></p>
+      </div>
+    </div>
+    <!-- Outfit Name -->
+    <!-- Submit Button -->
+    <div class="row">
+      <div class="col-12">
+       <%= f.input :name, class: "d-none", style: "visibility: hidden;" %>
+
+        <%= f.submit 'Save', class: 'tn btn-primary btn-lg mb-5' %>
+      </div>
+    </div>
+  <% end %>
 </div>
