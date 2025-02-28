@@ -1,0 +1,20 @@
+<div class="outfit-show p-3">
+  <h1>Outfit Details</h1>
+
+  <div class="outfit-products">
+    <% @outfit.products.each do |product| %>
+      <div class="outfit-product-card">
+        <%= image_tag(product.image, alt: product.name) %>
+        <p class="product-name"><%= product.name %></p>
+        <p class="product-price">¥<%= product.price %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <p class="total-price">Total: <%= number_to_currency(@outfit.products.sum(&:price), unit: '¥', precision: 0) %></p>
+
+  <!-- Back Button -->
+  <div class="back-button">
+    <%= link_to "Back to Outfits", outfits_path, class: "btn-back" %>
+  </div>
+</div>
