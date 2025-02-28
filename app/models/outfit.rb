@@ -6,7 +6,7 @@ class Outfit < ApplicationRecord
 
   # Optional fields
   validates :name, presence: true
-  validates :photo, presence: { message: "can't be blank. Please upload a photo." }
+  # validates :photo, presence: { message: "can't be blank. Please upload a photo." }
   validates :budget, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :season, inclusion: { in: %w(summer fall winter spring), message: "%{value} is not a valid season" }, allow_nil: true
   validates :style, inclusion: { in: %w(casual formal), message: "%{value} is not a valid style" }, allow_nil: true

@@ -1,14 +1,15 @@
 class OutfitsController < ApplicationController
     before_action :authenticate_user!
 
-      def index
-        @outfits = current_user.outfits
-        @closet_items = current_user.closet_items.includes(:product)
-      end
+  def index
+    @outfits = current_user.outfits
+    @closet_items = current_user.closet_items.includes(:product)
+  end
 
   def show
     @outfit = Outfit.find(params[:id])
   end
+
   def new
     @outfit = Outfit.new
     # Fetch products by type
@@ -48,21 +49,20 @@ class OutfitsController < ApplicationController
     @shoe_choice2 = @shoe_products.sample
   end
 
-def update
-  @outfit = Outfit.find(params[:id])
-  @top_product = Product.find(params[:top])
-  @outfit_product_top = OutfitProduct.create(outfit: @outfit, product: @top_product)
-  @bottom_product = Product.find(params[:bottom])
-  @outfit_product_bottom = OutfitProduct.create(outfit: @outfit, product: @bottom_product)
-  @shoe_product = Product.find(params[:shoe])
-  @outfit_product_shoe = OutfitProduct.create(outfit: @outfit, product: @shoe_product)
-
-  if @outfit.update(outfit_params)
-    redirect_to outfits_path
-  else
-    render :edit, status: :unprocessable_entity
+  def update
+    @outfit = Outfit.find(params[:id])
+    @top_product = Product.find(params[:top])
+    @outfit_product_top = OutfitProduct.create(outfit: @outfit, product: @top_product)
+    @bottom_product = Product.find(params[:bottom])
+    @outfit_product_bottom = OutfitProduct.create(outfit: @outfit, product: @bottom_product)
+    @shoe_product = Product.find(params[:shoe])
+    @outfit_product_shoe = OutfitProduct.create(outfit: @outfit, product: @shoe_product)
+    if @outfit.update(outfit_params)
+      redirect_to outfits_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
-end
 
   private
 
