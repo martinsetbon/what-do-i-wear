@@ -1,2 +1,15 @@
 // Import page-specific CSS files here.
 @import "home";
+
+
+.index-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

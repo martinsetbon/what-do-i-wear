@@ -135,10 +135,15 @@
   overflow: hidden;  /* Hide any overflow that goes outside the container */
   border: 1px solid #ccc;  /* Optional: add a border to the container */
   border-radius: 20px; /* Optional: round the corners */
+  transition: transform 0.2s ease-in-out; /* how fast it moves */
 }
 
 .outfit-product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;  /* This will make the image fill the container and crop if needed */
+}
+
+.outfit-product-image:hover {
+  transform: scale(1.1); /* how much bigger it gets */
 }

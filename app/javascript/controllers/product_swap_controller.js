@@ -31,7 +31,7 @@ export default class extends Controller {
       }).then(response=>response.json())
       .then(data=>{
         const id = `total-price-${data.id}`
-        document.getElementById(id).innerText = data.sum
+        document.getElementById(id).innerText = `$${data.sum}`
       })
 
       const formDataTwo = new FormData()
