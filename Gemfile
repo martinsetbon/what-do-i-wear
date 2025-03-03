@@ -58,6 +58,7 @@ gem "jbuilder"
 gem "ruby-openai"
 gem "solid_cable"
 gem "solid_queue"
+gem 'neighbor'
 
 
 

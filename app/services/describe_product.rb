@@ -25,18 +25,26 @@ class DescribeProduct
 
   def call
     client = OpenAI::Client.new
-    p messages = [
+    messages = [
       { type: "text", text: INSTRUCTIONS },
       { type: "image_url", image_url: { url: @photo_url } }
     ]
     puts '-' * 50
     puts "Sending request to OpenAI API to describe the photo..."
     puts '-' * 50
+    begin
     response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: messages }],
       max_tokens: 2000,
     })
     p response.dig("choices", 0, "message", "content")
+    rescue OpenAi::Error => e
+      puts "OpenAI API error: #{e.message}"
+    rescue Net::ReadTimeout
+      puts "Request timed out. Retrying..."
+      sleep(2) # Wait before retrying
+      retry
+    end
   end
 end
