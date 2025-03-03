@@ -1,7 +1,6 @@
 <div class="outfit-card">
   <div class="container-card bg-white-box">
     <div class="d-flex align-items-center justify-content-between">
-
       <% if outfit.top %>
         <div id="<%= outfit.top.id %>">
           <div class="outfit-product-image" data-product-swap-target="top" id="<%= outfit.top.product.id %>">
@@ -25,25 +24,22 @@
           </div>
         </div>
       <% end %>
-
     </div>
 
+        <p class="card-title"><%= outfit.name %></p>
+      <div class="d-flex justify-content-between">
+        <p class="card-description"><span id="total-price-<%= outfit.id %>"><%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></span></p>
+        <p class="card-description"><%= outfit.season&.capitalize %></p>
+      </div>
 
-
-
-    <p class="card-title"><%= outfit.name %></p>
-    <div class="d-flex justify-content-between">
-      <p class="card-description">Total Price: <span id="total-price-<%= outfit.id %>"><%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></span></p>
-      <p class="card-description"><%= outfit.season&.capitalize %></p>
-    </div>
-    <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between">
       <p class="card-description"><%= outfit.style&.capitalize %></p>
       <p class="card-description"><%= outfit.gender&.capitalize %></p>
-    </div>
-    <%= link_to outfit_path(outfit), method: :delete, data: { confirm: 'Are you sure you want to delete this outfit?' } do %>
+      </div>
+
+      <%= link_to outfit_path(outfit), method: :delete, data: { confirm: 'Are you sure you want to delete this outfit?' } do %>
+
       <i class="fa-regular fa-trash-can text-white"></i>
     <% end %>
-
   </div>
-
 </div>
