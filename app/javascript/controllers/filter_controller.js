@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect"];
+  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice"];
 
   connect() {
     // Ensure all product data is passed correctly into the controller
@@ -61,6 +61,7 @@ export default class extends Controller {
     // Update the image and hidden field with the next product
     this.productImageTarget.src = nextProduct.image;
     this.productFieldTarget.value = nextProduct.id;
+    this.productPriceTarget.textContent = nextProduct.price;
   }
 
   updateProductImage() {
@@ -68,6 +69,7 @@ export default class extends Controller {
       const firstProduct = this.filteredProducts[0]; // Use the first filtered product
       this.productImageTarget.src = firstProduct.image;
       this.productFieldTarget.value = firstProduct.id;
+      this.productPriceTarget.textContent = firstProduct.price;
     }
   }
 }

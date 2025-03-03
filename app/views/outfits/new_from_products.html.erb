@@ -1,6 +1,6 @@
 <h1 class="text-center">Customized outfit</h1>
 <p class="text-center">Click on the image to change the cloth !</p>
-<%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true, data: { controller: "product-selection", top_products: @top_products.to_json, bottom_products: @bottom_products.to_json, shoe_products: @shoe_products.to_json } do |f| %>
+<%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
   <div class="outfit-form">
     <!-- Filter for Top Products -->
     <h2 class="text-center">Select a Top</h2>
@@ -38,6 +38,7 @@
         <img data-filter-target="productImage" src="<%= @top_products.first.image %>" alt="<%= @top_products.first.name %>"
              data-action="click->filter#cycleProductImage" class="new-product-image">
         <%= hidden_field_tag 'outfit[top]', @top_products.first.id, data: { filter_target: "productField" } %>
+        <p>Price: $<span data-filter-target="productPrice"><%= @top_products.first.price %></span></p>
       </div>
     </div>
     <!-- Filter for Bottom Products -->
@@ -76,7 +77,8 @@
         <img data-filter-target="productImage" src="<%= @bottom_products.first.image %>" alt="<%= @bottom_products.first.name %>"
              data-action="click->filter#cycleProductImage" class="new-product-image">
         <%= hidden_field_tag 'outfit[bottom]', @bottom_products.first.id, data: { filter_target: "productField" } %>
-      </div>
+         <p>Price: $<span data-filter-target="productPrice"><%= @bottom_products.first.price %></span></p>
+       </div>
     </div>
     <!-- Filter for Shoes -->
     <h2 class="text-center">Select Shoes</h2>
@@ -114,6 +116,7 @@
         <img data-filter-target="productImage" src="<%= @shoe_products.first.image %>" alt="<%= @shoe_products.first.name %>"
              data-action="click->filter#cycleProductImage" class="new-product-image">
         <%= hidden_field_tag 'outfit[shoe]', @shoe_products.first.id, data: { filter_target: "productField" } %>
+         <p>Price: $<span data-filter-target="productPrice"><%= @shoe_products.first.price %></span></p>
       </div>
     </div>
     <!-- Outfit Name Field -->
