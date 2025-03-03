@@ -1,4 +1,5 @@
 class Outfit < ApplicationRecord
+  attr_accessor :top, :bottom, :shoe
   belongs_to :user
   has_one_attached :photo
   has_many :outfit_products, dependent: :destroy

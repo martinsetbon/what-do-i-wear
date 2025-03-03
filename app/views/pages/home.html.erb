@@ -1,24 +1,20 @@
 <div class="home-container">
   <div class="background-image-home">
-
     <!-- Title and Buttons Section -->
     <div class="title-buttons-container">
       <h1 id="home-title" class="title-home">What do I wear?</h1>
-
       <!-- Fashion at Your Fingertips paragraph with wrapping -->
       <p class="responsive-text">
         Fashion at your fingertips. Search for styles with AI, mix and match, and build your closet.
       </p>
-
       <!-- Buttons, centered -->
       <div class="buttons-home">
         <%= link_to new_outfit_path, class: "btn-home upload-btn", style: "text-decoration: none; color: black;" do %>
           <i class="fa-solid fa-images"></i> Upload
         <% end %>
-
-        <button class="btn-home generate-btn">
+        <%= link_to new_from_products_outfits_path, class: "btn-home generate-btn", style: "text-decoration: none;" do %>
           <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
-        </button>
+        <% end %>
       </div>
     </div>
   </div>
