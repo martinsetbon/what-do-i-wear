@@ -21,57 +21,130 @@ users = User.create!([
 puts "Users created"
 
 url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
-products_bottom = ClothesScraperService.scrape_clothes(url)
+men_products_jeans = ClothesScraperService.scrape_clothes(url)
 
-products_bottom.each do |bottom|
-product = Product.new(bottom)
+men_products_jeans.each do |jean|
+product = Product.new(jean)
 product.product_type = "bottom"
+product.season = "winter, fall, spring"
+product.style = "casual"
+product.gender = "male"
 product.save!
 p "#{product.name} has been created"
 end
 
-url = "https://www.farfetch.com/shopping/men/shoes-2/items.aspx"
-products_shoes = ClothesScraperService.scrape_clothes(url)
 
-products_shoes.each do |shoes|
-product = Product.new(shoes)
+url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
+men_products_trousers = ClothesScraperService.scrape_clothes(url)
+
+men_products_trousers.each do |trouser|
+product = Product.new(trouser)
+product.product_type = "bottom"
+product.season = "fall, summer, spring"
+product.style = "casual"
+product.gender = "male"
+product.save!
+p "#{product.name} has been created"
+end
+
+
+url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
+men_products_shorts = ClothesScraperService.scrape_clothes(url)
+
+men_products_shorts.each do |short|
+product = Product.new(short)
+product.product_type = "bottom"
+product.season = "summer"
+product.style = "casual"
+product.gender = "male"
+product.save!
+p "#{product.name} has been created"
+end
+
+
+url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
+men_products_boots = ClothesScraperService.scrape_clothes(url)
+
+men_products_boots.each do |boots|
+product = Product.new(boots)
 product.product_type = "shoes"
+product.season = "winter"
+product.style = "casual"
+product.gender = "male"
 product.save!
 p "#{product.name} has been created"
 end
+
+url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
+men_products_sneakers = ClothesScraperService.scrape_clothes(url)
+
+men_products_sneakers.each do |sneakers|
+product = Product.new(sneakers)
+product.product_type = "shoes"
+product.season = "winter, summer, spring, fall"
+product.style = "casual"
+product.gender = "male"
+product.save!
+p "#{product.name} has been created"
+end
+
+
+url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
+men_products_oxfords = ClothesScraperService.scrape_clothes(url)
+
+men_products_oxfords.each do |oxfords|
+product = Product.new(oxfords)
+product.product_type = "shoes"
+product.season = "spring, summer, winter, fall"
+product.style = "formal"
+product.gender = "male"
+product.save!
+p "#{product.name} has been created"
+end
+
 
 
 url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
+men_products_jackets = ClothesScraperService.scrape_clothes(url)
 
-products_top.each do |top|
-product = Product.new(top)
+men_products_jackets.each do |jacket|
+product = Product.new(jacket)
 product.product_type = "top"
+product.season = "winter, fall"
+product.style = "casual, formal"
+product.gender = "male"
 product.save!
 p "#{product.name} has been created"
 end
 
 
 url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
+men_products_tshirts = ClothesScraperService.scrape_clothes(url)
 
-products_top.each do |top|
-product = Product.new(top)
+men_products_tshirts.each do |tshirt|
+product = Product.new(tshirt)
 product.product_type = "top"
+product.season = "summer, spring"
+product.style = "casual"
+product.gender = "male"
 product.save!
 p "#{product.name} has been created"
 end
 
 
 url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
+men_products_sweaters = ClothesScraperService.scrape_clothes(url)
 
-products_top.each do |top|
-product = Product.new(top)
+men_products_sweaters.each do |sweater|
+product = Product.new(sweater)
 product.product_type = "top"
+product.season = "winter, fall"
+product.style = "casual"
+product.gender = "male"
 product.save!
 p "#{product.name} has been created"
 end
+
 
 
 
