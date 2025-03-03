@@ -1,15 +1,39 @@
 <div class="outfit-card">
   <div class="container-card bg-white-box">
     <div class="d-flex align-items-center justify-content-between">
-      <% outfit.products.each do |product| %>
-        <div class="outfit-product-image">
-          <%= image_tag(product.image, class: "img-fluid", alt: product.name) %>
+
+      <% if outfit.top %>
+        <div id="<%= outfit.top.id %>">
+          <div class="outfit-product-image" data-product-swap-target="top" id="<%= outfit.top.product.id %>">
+            <%= image_tag(outfit.top.product.image, class: "img-fluid", alt: outfit.top.product.name) %>
+          </div>
         </div>
       <% end %>
+
+      <% if outfit.bottom %>
+        <div id="<%= outfit.bottom.id %>">
+          <div class="outfit-product-image" data-product-swap-target="bottom" id="<%= outfit.bottom.product.id %>">
+            <%= image_tag(outfit.bottom.product.image, class: "img-fluid", alt: outfit.bottom.product.name) %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if outfit.shoes %>
+        <div id="<%= outfit.shoes.id %>">
+          <div class="outfit-product-image" data-product-swap-target="shoes" id="<%= outfit.shoes.product.id %>">
+            <%= image_tag(outfit.shoes.product.image, class: "img-fluid", alt: outfit.shoes.product.name) %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
+
+
+
+
     <p class="card-title"><%= outfit.name %></p>
     <div class="d-flex justify-content-between">
-      <p class="card-description">Total Price: <%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></p>
+      <p class="card-description">Total Price: <span id="total-price-<%= outfit.id %>"><%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></span></p>
       <p class="card-description"><%= outfit.season&.capitalize %></p>
     </div>
     <div class="d-flex justify-content-between">
@@ -19,5 +43,7 @@
     <%= link_to outfit_path(outfit), method: :delete, data: { confirm: 'Are you sure you want to delete this outfit?' } do %>
       <i class="fa-regular fa-trash-can text-white"></i>
     <% end %>
+
   </div>
+
 </div>

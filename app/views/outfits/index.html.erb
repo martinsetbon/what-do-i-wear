@@ -6,7 +6,7 @@
 <% if @outfits.empty? %>
   <p>You have no outfits yet. <%= link_to 'Create a new outfit', new_outfit_path %></p>
 <% else %>
-  <div class="outfit-cards text-left">
+  <div class="outfit-cards text-left" data-controller="product-swap">
     <% @outfits.each do |outfit| %>
       <%= link_to outfit_path(outfit), class: "outfit-card-link" do %>
         <%= render 'outfit_card', outfit: outfit %>
