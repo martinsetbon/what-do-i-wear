@@ -1,4 +1,5 @@
 class Outfit < ApplicationRecord
+  # after_commit :generate_description, on: :create
   attr_accessor :top, :bottom, :shoe
   belongs_to :user
   has_one_attached :photo
@@ -12,4 +13,9 @@ class Outfit < ApplicationRecord
   validates :season, inclusion: { in: %w(summer fall winter spring), message: "%{value} is not a valid season" }, allow_nil: true
   validates :style, inclusion: { in: %w(casual formal), message: "%{value} is not a valid style" }, allow_nil: true
   validates :gender, inclusion: { in: %w(male female unisex), message: "%{value} is not a valid gender" }, allow_nil: true
+
+
+  def generate_description
+    DescribeUploadedPicture.new(photo.url).call
+  end
 end

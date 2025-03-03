@@ -1,0 +1,74 @@
+<%= simple_form_for @outfit do |f| %>
+    <!-- Top Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="top" value="<%= @top_choice1.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @top_choice1&.image, class: "img-fluid" if @top_products.any? %>
+          </div>
+        </label>
+        <p>¥<%= @top_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="top" value="<%= @top_choice2.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @top_choice2&.image, class: "img-fluid" if @top_products.length > 1 %>
+          </div>
+        </label>
+        <p>¥<%= @top_choice2.price %></p>
+      </div>
+    </div>
+    <!-- Bottom Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="bottom" value="<%= @bottom_products.first.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @bottom_choice1&.image, class: "img-fluid" if @bottom_products.any? %>
+          </div>
+        </label>
+        <p>¥<%= @bottom_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="bottom" value="<%= @bottom_products.second.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @bottom_choice2&.image, class: "img-fluid" if @bottom_products.length > 1 %>
+          </div>
+        </label>
+        <p>¥<%= @bottom_choice2.price %></p>
+      </div>
+    </div>
+    <!-- Shoe Product Selection -->
+    <div class="row">
+      <div class="col-6">
+        <label>
+          <input type="radio" name="shoe" value="<%= @shoe_products.first.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @shoe_choice1&.image, class: "img-fluid" if @shoe_products.any? %>
+          </div>
+        </label>
+        <p>¥<%= @shoe_choice1.price %></p>
+      </div>
+      <div class="col-6">
+        <label>
+          <input type="radio" name="shoe" value="<%= @shoe_products.second.id%>" class="d-none" >
+          <div class="sugested-product-frame">
+            <%= image_tag @shoe_choice2&.image, class: "img-fluid" if @shoe_products.length > 1 %>
+          </div>
+        </label>
+        <p>¥<%= @shoe_choice2.price %></p>
+      </div>
+    </div>
+    <!-- Outfit Name -->
+    <!-- Submit Button -->
+    <div class="row">
+      <div class="col-12">
+       <%= f.input :name, class: "d-none", style: "visibility: hidden;" %>
+
+        <%= f.submit 'Save', class: 'tn btn-primary btn-lg mb-5' %>
+      </div>
+    </div>
+  <% end %>

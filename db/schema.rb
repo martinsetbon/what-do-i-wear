@@ -76,14 +76,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_123210) do
     t.string "name"
     t.decimal "price", precision: 10, scale: 2
     t.string "product_type"
+    t.string "image"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.bigint "image_attachment_id"
-    t.bigint "image_blob_id"
-    t.index ["image_attachment_id"], name: "index_products_on_image_attachment_id"
-    t.index ["image_blob_id"], name: "index_products_on_image_blob_id"
+    t.string "season"
+    t.string "style"
+    t.string "gender"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -205,9 +205,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_123210) do
     t.index ["expires_at"], name: "index_solid_queue_semaphores_on_expires_at"
     t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
-    t.string "season"
-    t.string "style"
-    t.string "gender"
   end
 
   create_table "users", force: :cascade do |t|
@@ -229,8 +226,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_123210) do
   add_foreign_key "outfit_products", "outfits"
   add_foreign_key "outfit_products", "products"
   add_foreign_key "outfits", "users"
-  add_foreign_key "products", "active_storage_attachments", column: "image_attachment_id"
-  add_foreign_key "products", "active_storage_blobs", column: "image_blob_id"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

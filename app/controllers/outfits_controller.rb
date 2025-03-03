@@ -75,6 +75,7 @@ class OutfitsController < ApplicationController
     @shoe_products = Product.where(product_type: 'shoes')
     @shoe_choice1 = @shoe_products.sample
     @shoe_choice2 = @shoe_products.sample
+    @description = @outfit.generate_description
   end
 
   def update

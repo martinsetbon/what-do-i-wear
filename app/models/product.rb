@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  after_commit :generate_description, on: :create
+  # after_validation :generate_description, on: :update
   has_many :outfit_products
   has_many :outfits, through: :outfit_products
   has_many :closet_items
@@ -15,5 +15,9 @@ class Product < ApplicationRecord
 
   def link_url
     "https://www.farfetch.com#{url}"
+  end
+
+  def generate_description
+    DescribeProduct.new(photo.url).call
   end
 end

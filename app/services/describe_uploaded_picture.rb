@@ -1,6 +1,6 @@
-class DescribePhoto
+class DescribeUploadedPicture
   INSTRUCTIONS = <<~INSTRUCTIONS
-  Describe the picture of the product with as much detail as possible. Include the following:
+  Describe the clothes in the picture with as much detail as possible. Include the following:
   Colors: Specify the main and secondary colors (e.g., navy, burgundy, emerald green). Mention any color-blocking or multiple color combinations (e.g., black sleeves with a white body).
   Material: Identify the fabric or material used (e.g., cotton, polyester, wool, denim, leather, silk, velvet, fleece). Describe the texture (e.g., soft, smooth, stretchy, stiff, ribbed, knitted).
   Neckline: Describe the neck style (e.g., round neck, V-neck, turtle neck, cowl neck, high neck, scoop neck, square neck, boat neck). Mention if it has any special elements like a pleated collar or a keyhole detail.
@@ -17,6 +17,21 @@ class DescribePhoto
   Functionality and Utility: Indicate if the garment has any functional features like drawstrings, adjustable straps, snap buttons, or hooks.
   Inner Layer or Lining: Describe if there is any visible inner lining or special material (e.g., fleece lining, quilted inner, faux fur lining). For coats, jackets, or outerwear, mention if the lining is insulated or padded.
   Brand or Designer: If visible, mention any designer logo, brand name, or emblem that could identify the item (e.g., a small "Nike" logo on the sleeve, a "Gucci" tag inside the collar).
+  Put the description in this Json format to split the decription for the Top the bottom and the shoes, for exemple:
+  {
+    top{
+      name:"specific name of the top"
+      description: "your description with all de details from before"
+    }
+    bottom{
+      name:"specific name of the bottom"
+      description: "description again"
+    }
+    shoes{
+      name: "specific name of the shoes"
+      description: "description"
+    }
+  }
   INSTRUCTIONS
 
   def initialize(photo_url)

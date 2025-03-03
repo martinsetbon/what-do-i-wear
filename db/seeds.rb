@@ -22,37 +22,34 @@ puts "Users created"
 
 url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
 men_products_jeans = ClothesScraperService.scrape_clothes(url)
-
-products_bottom.first(3).each do |bottom|
-  p bottom
-file = URI.parse(bottom[:image]).open
-bottom.delete(:image)
-product = Product.new(bottom)
-product.photo.attach(io: file, filename: "#{bottom[:name]}.png", content_type: "image/png")
-men_products_jeans.each do |jean|
+men_products_jeans.first(5).each do |jean|
+file = URI.open(jean[:image])
 product = Product.new(jean)
 product.product_type = "bottom"
 product.season = "winter, fall, spring"
 product.style = "casual"
 product.gender = "male"
 product.save!
+product.photo.attach(io: file, filename: "#{product.name}.jpg", content_type: "image/jpg")
+product.description = product.generate_description
+product.save!
 p "#{product.name} has been created"
 end
 
 
-products_shoes.first(3).each do |shoes|
-file = URI.parse(shoes.image).open
-product = Product.new(shoes)
-product.photo.attach(io: file, filename: "#{shoes.name}.png", content_type: "image/png")
+
 url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
 men_products_trousers = ClothesScraperService.scrape_clothes(url)
-
-men_products_trousers.each do |trouser|
+products_trousers.first(5).each do |trouser|
+file = URI.open(trouser[:image])
 product = Product.new(trouser)
 product.product_type = "bottom"
-product.season = "fall, summer, spring"
+product.season = "summer, spring"
 product.style = "casual"
 product.gender = "male"
+product.save!
+product.photo.attach(io: file, filename: "#{trouser.name}.png", content_type: "image/png")
+product.description = product.generate_description
 product.save!
 p "#{product.name} has been created"
 end
@@ -60,13 +57,16 @@ end
 
 url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
 men_products_shorts = ClothesScraperService.scrape_clothes(url)
-
-men_products_shorts.each do |short|
+products_shorts.first(5).each do |short|
+file = URI.open(short[:image])
 product = Product.new(short)
 product.product_type = "bottom"
 product.season = "summer"
 product.style = "casual"
 product.gender = "male"
+product.save!
+product.photo.attach(io: file, filename: "#{short.name}.png", content_type: "image/png")
+product.description = product.generate_description
 product.save!
 p "#{product.name} has been created"
 end
@@ -74,101 +74,107 @@ end
 
 url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
 men_products_boots = ClothesScraperService.scrape_clothes(url)
-
-men_products_boots.each do |boots|
-product = Product.new(boots)
+products_boots.first(5).each do |boot|
+file = URI.open(boot[:image])
+product = Product.new(boot)
 product.product_type = "shoes"
 product.season = "winter"
 product.style = "casual"
 product.gender = "male"
+product.save!
+product.photo.attach(io: file, filename: "#{boot.name}.png", content_type: "image/png")
+product.description = product.generate_description
 product.save!
 p "#{product.name} has been created"
 end
 
 url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
 men_products_sneakers = ClothesScraperService.scrape_clothes(url)
-
-men_products_sneakers.each do |sneakers|
-product = Product.new(sneakers)
+products_sneakers.first(5).each do |sneaker|
+file = URI.open(sneaker[:image])
+product = Product.new(sneaker)
 product.product_type = "shoes"
-product.season = "winter, summer, spring, fall"
+product.season = "fall, summer, spring"
 product.style = "casual"
 product.gender = "male"
 product.save!
+product.photo.attach(io: file, filename: "#{sneaker.name}.png", content_type: "image/png")
+product.description = product.generate_description
+product.save!
 p "#{product.name} has been created"
 end
+
 
 
 url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
 men_products_oxfords = ClothesScraperService.scrape_clothes(url)
-
-men_products_oxfords.each do |oxfords|
-product = Product.new(oxfords)
+products_oxfords.first(5).each do |oxford|
+file = URI.open(oxford[:image])
+product = Product.new(oxford)
 product.product_type = "shoes"
-product.season = "spring, summer, winter, fall"
+product.season = "fall, summer, spring"
 product.style = "formal"
 product.gender = "male"
+product.save!
+product.photo.attach(io: file, filename: "#{oxford.name}.png", content_type: "image/png")
+product.description = product.generate_description
 product.save!
 p "#{product.name} has been created"
 end
 
 
 
-url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
-file = URI.parse(top.image).open
-products_top.first(3).each do |top|
-product = Product.new(top)
-product.photo.attach(io: file, filename: "#{top.name}.png", content_type: "image/png")
-men_products_jackets = ClothesScraperService.scrape_clothes(url)
 
-men_products_jackets.each do |jacket|
+url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
+men_products_jackets = ClothesScraperService.scrape_clothes(url)
+products_jackets.first(5).each do |jacket|
+file = URI.open(jacket[:image])
 product = Product.new(jacket)
 product.product_type = "top"
-product.season = "winter, fall"
-product.style = "casual, formal"
+product.season = "fall, winter"
+product.style = "casual"
 product.gender = "male"
+product.save!
+product.photo.attach(io: file, filename: "#{jacket.name}.png", content_type: "image/png")
+product.description = product.generate_description
 product.save!
 p "#{product.name} has been created"
 end
 
 
 url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
-file = URI.parse(top.image).open
-products_top.first(3).each do |top|
-product = Product.new(top)
-product.photo.attach(io: file, filename: "#{top.name}.png", content_type: "image/png")
 men_products_tshirts = ClothesScraperService.scrape_clothes(url)
-
-men_products_tshirts.each do |tshirt|
+products_tshirts.first(5).each do |tshirt|
+file = URI.open(tshirt[:image])
 product = Product.new(tshirt)
 product.product_type = "top"
 product.season = "summer, spring"
 product.style = "casual"
 product.gender = "male"
 product.save!
+product.photo.attach(io: file, filename: "#{tshirt.name}.png", content_type: "image/png")
+product.description = product.generate_description
+product.save!
 p "#{product.name} has been created"
 end
 
 
 url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
-products_top = ClothesScraperService.scrape_clothes(url)
-file = URI.parse(top.image).open
-products_top.first(3).each do |top|
-product = Product.new(top)
-product.photo.attach(io: file, filename: "#{top.name}.png", content_type: "image/png")
 men_products_sweaters = ClothesScraperService.scrape_clothes(url)
-
-men_products_sweaters.each do |sweater|
+products_sweaters.first(5).each do |sweater|
+file = URI.open(sweater[:image])
 product = Product.new(sweater)
 product.product_type = "top"
-product.season = "winter, fall"
+product.season = "fall, winter"
 product.style = "casual"
 product.gender = "male"
 product.save!
+product.photo.attach(io: file, filename: "#{sweater.name}.png", content_type: "image/png")
+product.description = product.generate_description
+product.save!
 p "#{product.name} has been created"
 end
+
 
 
 
