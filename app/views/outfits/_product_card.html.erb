@@ -1,15 +1,17 @@
 <div class="product-card d-flex rounded-pill">
   <div class="product-image">
-  <%= link_to closet_item.product.link_url, target: "_blank" do %>
-    <%= image_tag closet_item.product.image, class: "product-image", alt: closet_item.product.name %>
+    <%= link_to closet_item.product.link_url, target: "_blank" do %>
+      <%= image_tag closet_item.product.image, class: "product-image", alt: closet_item.product.name %>
     <% end %>
   </div>
   <div class="product-infos text-left">
     <p class="product-name"><%= closet_item.product.name %></p>
     <hr class="mt-0 mb-0 product-card-line">
     <div class="d-flex justify-content-between mt-2 pe-3">
-      <p class="product-price"><%= number_to_currency(closet_item.product.price, {unit: '¥', precision: 0}) %></p>
-      <%= link_to 'Remove', outfits_path(closet_item), method: :delete, class: "rounded-pill product-remove", data: { confirm: 'Are you sure you want to delete this product from your closet?' } %>
+      <p class="product-price"><%= number_to_currency(closet_item.product.price, {unit: '$', precision: 0}) %></p>
+      <%= link_to outfits_path(closet_item), method: :delete, class: "rounded-pill product-remove", data: { confirm: 'Are you sure you want to delete this product from your closet?' } do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
     </div>
   </div>
 </div>

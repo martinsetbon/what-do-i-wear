@@ -75,7 +75,6 @@ color: black;
   height: 100px; /* Set the height of the image container */
   overflow: hidden;  /* Hide any overflow that goes outside the container */
   border-radius: 50%; /* Optional: round the corners */
-  border: solid 1px black;
 }
 
 .product-image img {
@@ -86,11 +85,13 @@ color: black;
 
 .product-name {
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 1px;
+  padding: 8px;
+
 }
 
 .product-price {
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 

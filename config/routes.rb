@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :outfits do
-    resources :outfit_products, only: [:new, :create, :destroy]
+    resources :outfit_products, only: [:new, :create]
+    collection do
+      get 'new_from_products'  # Route to display the form for creating an outfit from products
+      post 'create_from_products'  # Add a POST route for the create_from_products actio
+    end
   end
-
+  resources :outfit_products, only: [:destroy]
 
   resources :products, only: [:create, :show] do
     resources :closet_items, only: [:create, :destroy]

@@ -1,6 +1,6 @@
 <%# Display the list of outfits for the current user %>
 
-<div class="container text-center mt-3">
+<div class="container text-center mt-3 index-page">
 <h1 class="mt-3 mb-3">Your Outfits</h1>
 
 <% if @outfits.empty? %>
@@ -15,7 +15,7 @@
 <% end %>
 </div>
 
- <h2 class="mt-3 mb-3">Your Products</h2>
+ <h2 class="m-4">Your Products</h2>
   <% if @closet_items.empty? %>
     <p>Your closet is empty. <%= link_to 'Add products to your closet', products_path %></p>
   <% else %>

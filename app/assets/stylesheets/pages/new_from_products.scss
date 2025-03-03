@@ -1,0 +1,23 @@
+hr{
+  height: 2px;
+  color: white;
+}
+/* Left side: Filters (stacked vertically) */
+.filter-box {
+
+}
+
+/* Right side: Product image */
+.product-group {
+
+}
+
+/* Make sure product images are responsive */
+.new-product-image {
+  max-width: 200px; /* Controls image size */
+  height: auto;
+}
+
+h2{
+  color: white;
+}
