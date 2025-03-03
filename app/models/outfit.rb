@@ -1,5 +1,4 @@
 class Outfit < ApplicationRecord
-  attr_accessor :top, :bottom, :shoe
   belongs_to :user
   has_one_attached :photo
   has_many :outfit_products, dependent: :destroy
@@ -12,4 +11,20 @@ class Outfit < ApplicationRecord
   validates :season, inclusion: { in: %w(summer fall winter spring), message: "%{value} is not a valid season" }, allow_nil: true
   validates :style, inclusion: { in: %w(casual formal), message: "%{value} is not a valid style" }, allow_nil: true
   validates :gender, inclusion: { in: %w(male female unisex), message: "%{value} is not a valid gender" }, allow_nil: true
+
+  def top
+    self.outfit_products.find { |op| op.product.product_type == 'top' }
+  end
+
+  def bottom
+    self.outfit_products.find { |op| op.product.product_type == 'bottom' }
+  end
+
+  def shoes
+    self.outfit_products.find { |op| op.product.product_type == 'shoes' }
+  end
+
+  def sum
+    self.products.sum(&:price)
+  end
 end
