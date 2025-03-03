@@ -3,9 +3,8 @@
     <%= cl_image_tag(@outfit.photo.key, class: "img-fluid") %>
   </div>
   <h1><%= @outfit.name %></h1>
-    <%= @description %>
   <hr>
   <H2>Our selection from your picture</H2>
   <p class="text-start small">select each piece that you want (left or right) and press the "save" button!</p>
-
+  <%= render 'form', outfit: @outfit %>
 </div>

@@ -23,7 +23,7 @@ class Product < ApplicationRecord
     DescribeProduct.new(photo.url).call
   end
 
-  private
+  # private
 
   def set_embedding
     client = OpenAI::Client.new

@@ -1,5 +1,5 @@
 class Outfit < ApplicationRecord
-  # after_commit :generate_description, on: :create
+  # after_create :generate_embedding
   attr_accessor :top, :bottom, :shoe
   belongs_to :user
   has_one_attached :photo
@@ -17,5 +17,61 @@ class Outfit < ApplicationRecord
 
   def generate_description
     DescribeUploadedPicture.new(photo.url).call
+  end
+
+  def generate_embedding
+    description = generate_description
+    clean_description = description.gsub("```json", "").gsub("```","")
+    result = JSON.parse(clean_description)
+    client = OpenAI::Client.new
+    top_embedding = client.embeddings(
+      parameters: {
+        model: 'text-embedding-3-small',
+        input: "Product: #{result["top"]["name"]}. Description: #{result["top"]["description"]}"
+      }
+    )
+    embedding = top_embedding['data'][0]['embedding']
+    update(top_embedding: embedding)
+
+    client = OpenAI::Client.new
+    bottom_embedding = client.embeddings(
+      parameters: {
+        model: 'text-embedding-3-small',
+        input: "Product: #{result["bottom"]["name"]}. Description: #{result["bottom"]["description"]}"
+      }
+    )
+    embedding = bottom_embedding['data'][0]['embedding']
+    update(bottom_embedding: embedding)
+
+    client = OpenAI::Client.new
+    shoes_embedding = client.embeddings(
+      parameters: {
+        model: 'text-embedding-3-small',
+        input: "Product: #{result["shoes"]["name"]}. Description: #{result["shoes"]["description"]}"
+      }
+    )
+    embedding = shoes_embedding['data'][0]['embedding']
+    update(shoes_embedding: embedding)
+  end
+
+  def nearest_tops
+    return Product.nearest_neighbors(
+        :embedding, top_embedding,
+        distance: "euclidean"
+      ).first(2)
+  end
+
+  def nearest_bottoms
+    return Product.nearest_neighbors(
+        :embedding, bottom_embedding,
+        distance: "euclidean"
+      ).first(2)
+  end
+
+  def nearest_shoes
+    return Product.nearest_neighbors(
+        :embedding, shoes_embedding,
+        distance: "euclidean"
+      ).first(2)
   end
 end

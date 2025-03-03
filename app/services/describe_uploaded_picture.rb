@@ -40,7 +40,7 @@ class DescribeUploadedPicture
 
   def call
     client = OpenAI::Client.new
-    p messages = [
+    messages = [
       { type: "text", text: INSTRUCTIONS },
       { type: "image_url", image_url: { url: @photo_url } }
     ]

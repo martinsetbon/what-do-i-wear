@@ -22,6 +22,7 @@ class OutfitsController < ApplicationController
     @outfit = Outfit.new(outfit_params)
     @outfit.user = current_user # Associate the user
     if @outfit.save
+      @outfit.generate_embedding
       redirect_to edit_outfit_path(@outfit), notice: "Outfit created!"
     else
       render :new, status: :unprocessable_entity
@@ -67,15 +68,14 @@ class OutfitsController < ApplicationController
     @outfit_product = OutfitProduct.new
     # Fetch products by type
     @top_products = Product.where(product_type: 'top')
-    @top_choice1 = @top_products.sample
-    @top_choice2 = @top_products.sample
+    tops =  @outfit.nearest_tops
+    @top_choice1 = tops.first
+    @top_choice2 = tops.second
     @bottom_products = Product.where(product_type: 'bottom')
-    @bottom_choice1 = @bottom_products.sample
-    @bottom_choice2 = @bottom_products.sample
+    @bottom_choice1, @bottom_choice2 = @outfit.nearest_bottoms
     @shoe_products = Product.where(product_type: 'shoes')
-    @shoe_choice1 = @shoe_products.sample
-    @shoe_choice2 = @shoe_products.sample
-    @description = @outfit.generate_description
+    @shoe_choice1, @shoe_choice2 = @outfit.nearest_shoes
+    # @description = @outfit.generate_description
   end
 
   def update
