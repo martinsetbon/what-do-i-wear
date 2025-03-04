@@ -16,7 +16,7 @@ class Product < ApplicationRecord
 
 
   def link_url
-    "https://www.farfetch.com#{url}"
+    url
   end
 
   def generate_description
