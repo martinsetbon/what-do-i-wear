@@ -8,7 +8,7 @@
           <%= image_tag @top_choice1&.image, class: "img-fluid" if @top_products.any? %>
         </div>
       </label>
-      <p>¥<%= @top_choice1.price %></p>
+      <p>$<%= @top_choice1.price %></p>
     </div>
     <div class="col-6">
       <label>
@@ -29,7 +29,7 @@
           <%= image_tag @bottom_choice1&.image, class: "img-fluid" if @bottom_products.any? %>
         </div>
       </label>
-      <p>¥<%= @bottom_choice1.price %></p>
+      <p>$<%= @bottom_choice1.price %></p>
     </div>
     <div class="col-6">
       <label>
@@ -38,7 +38,7 @@
           <%= image_tag @bottom_choice2&.image, class: "img-fluid" if @bottom_products.length > 1 %>
         </div>
       </label>
-      <p>¥<%= @bottom_choice2.price %></p>
+      <p>$<%= @bottom_choice2.price %></p>
     </div>
   </div>
   <!-- Shoe Product Selection -->
@@ -50,7 +50,7 @@
           <%= image_tag @shoe_choice1&.image, class: "img-fluid" if @shoe_products.any? %>
         </div>
       </label>
-      <p>¥<%= @shoe_choice1.price %></p>
+      <p>$<%= @shoe_choice1.price %></p>
     </div>
     <div class="col-6">
       <label>
@@ -59,7 +59,7 @@
           <%= image_tag @shoe_choice2&.image, class: "img-fluid" if @shoe_products.length > 1 %>
         </div>
       </label>
-      <p>¥<%= @shoe_choice2.price %></p>
+      <p>$<%= @shoe_choice2.price %></p>
     </div>
   </div>
   <!-- Outfit Name -->
