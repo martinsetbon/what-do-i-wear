@@ -2,6 +2,18 @@
 @import "home";
 
 .closet-container {
-  background:url('background_white_wall.jpg') ;
-  background-size: contain;
+  background:url('5.jpg') ;
+  background-size: cover;
+}
+
+.index-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: #333333;
+  margin-bottom: 1rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
