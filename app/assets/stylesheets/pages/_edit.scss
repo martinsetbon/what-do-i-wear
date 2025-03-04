@@ -1,39 +1,141 @@
-.upload-image-frame {
-  width: 350px;  /* Set the width of the image container */
-  height: 350px; /* Set the height of the image container */
-  overflow: hidden;  /* Hide any overflow that goes outside the container */
-  border: 1px solid #ccc;  /* Optional: add a border to the container */
-  border-radius: 20px;
-  margin: 40px auto;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+.edit-page {
+  background: rgba(20, 20, 20, 0.85); /* Dark overlay for readability */
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  padding: 40px 25px;
+  max-width: 700px;
+  background: url('background_closet.jpg') no-repeat center center;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 15px;
+    letter-spacing: 1.5px;
+    text-transform: capitalize;
+    color: #fff;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 12px;
+    letter-spacing: 1px;
+    color: #ddd;
+    margin-bottom: 12px;
+  }
+
+  hr {
+    width: 85%;
+    height: 2px;
+    background: #777;
+    margin: 15px auto;
+    border: none;
+  }
 }
 
-.upload-image-frame img {
+/* Upload Image Frame (Scoped to .edit-page) */
+.edit-page .upload-image-frame {
+  width: 320px;
+  height: 320px;
+  overflow: hidden;
+  border: 1px solid #666;
+  border-radius: 20px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 34, 34, 0.9);
+  transition: transform 0.3s ease-in-out;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover img {
+    transform: scale(0.98);
+  }
+}
+
+/* Buttons (Scoped to .edit-page) */
+.edit-page .btn-primary {
+  background: linear-gradient(135deg, #666, #333);
+  border: none;
+  padding: 14px 22px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #444, #222);
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Product Selection (Scoped to .edit-page) */
+.edit-page .product-option {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-page .product-option input:checked + .suggested-product-frame {
+  border: 3px solid #bbb;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  transform: scale(1.08);
+}
+
+.edit-page .suggested-product-frame {
+  width: 140px;
+  height: 140px;
+  border: 2px solid #555;
+  padding: 10px;
+  border-radius: 12px;
+  transition: border 0.3s, box-shadow 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: rgba(34, 34, 34, 0.85);
+}
+
+.edit-page .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top; /* This will make the image fill the container and crop if needed */
+  border-radius: 12px;
 }
 
-
-.sugested-product-frame {
-  width: 150px;  /* Set the width of the image container */
-  height: 150px; /* Set the height of the image container */
-  overflow: hidden;  /* Hide any overflow that goes outside the container */
-  border: 1px solid #ccc;  /* Optional: add a border to the container */
-  border-radius: 20px; /* Optional: round the corners */
-  margin: 0 auto;
+.edit-page .price-text {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #bbb;
 }
 
-.sugested-product-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* This will make the image fill the container and crop if needed */
+/* Save Button (Scoped to .edit-page) */
+.edit-page .save-btn {
+  background: linear-gradient(135deg, #777, #444);
+  border: none;
+  font-size: 18px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.edit_outfit {
-  label:has(:checked){
-    outline: solid 2px $blue;
-    border-radius: 20px;
-
-  }
+.edit-page .save-btn:hover {
+  background: linear-gradient(135deg, #555, #222);
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
 }

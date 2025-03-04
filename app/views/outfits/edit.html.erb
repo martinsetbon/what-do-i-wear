@@ -1,10 +1,9 @@
-<div class="container text-center mb-5">
-  <div class="upload-image-frame text-center">
-    <%= cl_image_tag(@outfit.photo.key, class: "img-fluid") %>
-  </div>
-  <h1><%= @outfit.name %></h1>
-  <hr>
-  <H2>Our selection from your picture</H2>
-  <p class="text-start small">select each piece that you want (left or right) and press the "save" button!</p>
-  <%= render 'form', outfit: @outfit %>
+<div class="edit-page">
+    <div class="upload-image-frame text-center">
+      <%= cl_image_tag(@outfit.photo.key, class: "img-fluid") %>
+    </div>
+    <h1><%= @outfit.name %></h1>
+    <hr>
+    <h3>Pick your favorite pieces, then tap "Save Outfit" to move forward.</h3>
+    <%= render 'form', outfit: @outfit %>
 </div>

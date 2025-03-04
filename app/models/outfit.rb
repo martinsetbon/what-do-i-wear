@@ -89,6 +89,5 @@ class Outfit < ApplicationRecord
 
   def sum
     self.products.sum(&:price)
-
   end
 end
