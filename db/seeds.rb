@@ -22,7 +22,8 @@ puts "Users created"
 
 url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
 men_products_jeans = ClothesScraperService.scrape_clothes(url)
-men_products_jeans.first(3).each do |jean|
+
+men_products_jeans.first(10).each do |jean|
   begin
   file = URI.open(jean[:image])
   product = Product.new(jean)
@@ -40,8 +41,8 @@ men_products_jeans.first(3).each do |jean|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -52,7 +53,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
 men_products_trousers = ClothesScraperService.scrape_clothes(url)
-men_products_trousers.first(3).each do |trouser|
+men_products_trousers.first(10).each do |trouser|
   begin
   file = URI.open(trouser[:image])
   product = Product.new(trouser)
@@ -70,8 +71,8 @@ men_products_trousers.first(3).each do |trouser|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -81,7 +82,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
 men_products_shorts = ClothesScraperService.scrape_clothes(url)
-men_products_shorts.first(3).each do |short|
+men_products_shorts.first(10).each do |short|
   begin
   file = URI.open(short[:image])
   product = Product.new(short)
@@ -99,8 +100,8 @@ men_products_shorts.first(3).each do |short|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -110,7 +111,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
 men_products_boots = ClothesScraperService.scrape_clothes(url)
-men_products_boots.first(3).each do |boot|
+men_products_boots.first(10).each do |boot|
   begin
   file = URI.open(boot[:image])
   product = Product.new(boot)
@@ -128,8 +129,8 @@ men_products_boots.first(3).each do |boot|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -139,7 +140,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
 men_products_sneakers = ClothesScraperService.scrape_clothes(url)
-men_products_sneakers.first(3).each do |sneaker|
+men_products_sneakers.first(10).each do |sneaker|
   begin
     file = URI.open(sneaker[:image])
     product = Product.new(sneaker)
@@ -157,8 +158,8 @@ men_products_sneakers.first(3).each do |sneaker|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -169,7 +170,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
 men_products_oxfords = ClothesScraperService.scrape_clothes(url)
-men_products_oxfords.first(3).each do |oxford|
+men_products_oxfords.first(10).each do |oxford|
   begin
   file = URI.open(oxford[:image])
   product = Product.new(oxford)
@@ -187,8 +188,8 @@ men_products_oxfords.first(3).each do |oxford|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -200,7 +201,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
 men_products_jackets = ClothesScraperService.scrape_clothes(url)
-men_products_jackets.first(3).each do |jacket|
+men_products_jackets.first(10).each do |jacket|
   begin
     file = URI.open(jacket[:image])
     product = Product.new(jacket)
@@ -218,8 +219,8 @@ men_products_jackets.first(3).each do |jacket|
     product.description = product.generate_description
     rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-    product.destroy if product.persisted?
+    puts "Skipping - Image is not accessible."
+    product.destroy if product && product.persisted?
     next
   end
 product.save!
@@ -229,7 +230,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
 men_products_tshirts = ClothesScraperService.scrape_clothes(url)
-men_products_tshirts.first(3).each do |tshirt|
+men_products_tshirts.first(10).each do |tshirt|
   begin
     file = URI.open(tshirt[:image])
     product = Product.new(tshirt)
@@ -247,8 +248,8 @@ men_products_tshirts.first(3).each do |tshirt|
     product.description = product.generate_description
     rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
       # Handle network/image fetching errors
-      puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-      product.destroy if product.persisted?
+      puts "Skipping - Image is not accessible."
+      product.destroy if product && product.persisted?
       next
     end
   product.save!
@@ -258,7 +259,7 @@ end
 
 url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
 men_products_sweaters = ClothesScraperService.scrape_clothes(url)
-men_products_sweaters.first(3).each do |sweater|
+men_products_sweaters.first(10).each do |sweater|
   begin
     file = URI.open(sweater[:image])
     product = Product.new(sweater)
@@ -276,8 +277,8 @@ men_products_sweaters.first(3).each do |sweater|
     product.description = product.generate_description
     rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
       # Handle network/image fetching errors
-      puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
-      product.destroy if product.persisted?
+      puts "Skipping - Image is not accessible."
+      product.destroy if product && product.persisted?
       next
     end
 product.save!
