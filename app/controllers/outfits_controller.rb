@@ -68,13 +68,18 @@ class OutfitsController < ApplicationController
     @top_choice1 = tops.first
     @top_choice2 = tops.second
     @bottom_products = Product.where(product_type: 'bottom')
-    @bottom_choice1, @bottom_choice2 = @outfit.nearest_bottoms
+    bottoms = @outfit.nearest_bottoms
+    @bottom_choice1 = bottoms.first
+    @bottom_choice2 = bottoms.second
     @shoe_products = Product.where(product_type: 'shoes')
-    @shoe_choice1, @shoe_choice2 = @outfit.nearest_shoes
+    shoes = @outfit.nearest_shoes
+    @shoe_choice1 = shoes.first
+    @shoe_choice2 = shoes.second
     # @description = @outfit.generate_description
   end
 
   def update
+
     @outfit = Outfit.find(params[:id])
     @top_product = Product.find(params[:top])
     @outfit_product_top = OutfitProduct.create(outfit: @outfit, product: @top_product)
@@ -82,6 +87,7 @@ class OutfitsController < ApplicationController
     @outfit_product_bottom = OutfitProduct.create(outfit: @outfit, product: @bottom_product)
     @shoe_product = Product.find(params[:shoe])
     @outfit_product_shoe = OutfitProduct.create(outfit: @outfit, product: @shoe_product)
+
     if @outfit.update(outfit_params)
       redirect_to outfits_path
     else

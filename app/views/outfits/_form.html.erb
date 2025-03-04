@@ -24,7 +24,7 @@
   <div class="row">
     <div class="col-6">
       <label>
-        <input type="radio" name="bottom" value="<%= @bottom_products1&.id%>" class="d-none" >
+        <input type="radio" name="bottom" value="<%= @bottom_choice1&.id%>" class="d-none" >
         <div class="sugested-product-frame">
           <%= image_tag @bottom_choice1&.image, class: "img-fluid" if @bottom_products.any? %>
         </div>
@@ -33,7 +33,7 @@
     </div>
     <div class="col-6">
       <label>
-        <input type="radio" name="bottom" value="<%= @bottom_products2&.id%>" class="d-none" >
+        <input type="radio" name="bottom" value="<%= @bottom_choice2&.id%>" class="d-none" >
         <div class="sugested-product-frame">
           <%= image_tag @bottom_choice2&.image, class: "img-fluid" if @bottom_products.length > 1 %>
         </div>
@@ -45,7 +45,7 @@
   <div class="row">
     <div class="col-6">
       <label>
-        <input type="radio" name="shoe" value="<%= @shoe_products1&.id%>" class="d-none" >
+        <input type="radio" name="shoe" value="<%= @shoe_choice1&.id%>" class="d-none" >
         <div class="sugested-product-frame">
           <%= image_tag @shoe_choice1&.image, class: "img-fluid" if @shoe_products.any? %>
         </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="col-6">
       <label>
-        <input type="radio" name="shoe" value="<%= @shoe_products2&.id%>" class="d-none" >
+        <input type="radio" name="shoe" value="<%= @shoe_choice2&.id%>" class="d-none" >
         <div class="sugested-product-frame">
           <%= image_tag @shoe_choice2&.image, class: "img-fluid" if @shoe_products.length > 1 %>
         </div>
