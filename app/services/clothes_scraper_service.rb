@@ -34,7 +34,7 @@ class ClothesScraperService
       clothes << {
         name: "#{item["brand"]["name"]} - #{item["name"]}",
         price: item["offers"]["price"],
-        url: item["offers"]["url"],
+        url: "https://www.farfetch.com#{item["offers"]["url"]}",
         image: item["image"][0]
       }
     end
