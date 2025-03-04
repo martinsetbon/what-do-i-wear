@@ -3,7 +3,7 @@
 .outfit-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 16px;
+  grid-gap: 2px;
 }
 
 // Smallest device
@@ -54,10 +54,9 @@
 .outfit-card {
   max-width: 550px;
   border: 0;
-  width: 100%;
+  width: 95%;
   margin-inline: auto;
   a{
-    padding: 4px 8px 4px 8px;
     text-decoration: none;
   }
 }
@@ -65,10 +64,11 @@
 .container-card {
   position: relative;
   border: 2px solid transparent;
-  background: linear-gradient(71deg, #080509, #1a171c, #080509);
+  background:black;
   background-clip: padding-box;
-  border-radius: 25px;
+  border-radius: 24px;
   padding: 24px;
+  margin: 2px;
   img {
     margin-bottom: 32px;
   }
@@ -113,7 +113,7 @@
 
 .card-title {
   font-weight: 100;
-  color: white;
+  color: #dcdcd7;
   letter-spacing: -0.02em;
   line-height: 40px;
   font-style: normal;

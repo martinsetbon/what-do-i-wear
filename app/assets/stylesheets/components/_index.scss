@@ -10,7 +10,6 @@
 
 h1{
 font-size: 24px;
-color: white;
 }
 
 h2{
@@ -22,11 +21,18 @@ p{
   color: white;
 }
 
-body {
-  background: url('background closet.jpg') no-repeat center center;
-  background-size: cover;
-}
-
 hr{
   color: white;
+}
+
+.index-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: black;
+  margin-bottom: 1rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
