@@ -73,5 +73,21 @@ class Outfit < ApplicationRecord
         :embedding, shoes_embedding,
         distance: "euclidean"
       ).first(2)
+
+  def top
+    self.outfit_products.find { |op| op.product.product_type == 'top' }
+  end
+
+  def bottom
+    self.outfit_products.find { |op| op.product.product_type == 'bottom' }
+  end
+
+  def shoes
+    self.outfit_products.find { |op| op.product.product_type == 'shoes' }
+  end
+
+  def sum
+    self.products.sum(&:price)
+
   end
 end

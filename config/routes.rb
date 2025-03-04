@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
   resources :outfit_products, only: [:destroy]
+  resources :outfit_products, only: :update, defaults: { format: :json }
 
   resources :products, only: [:create, :show] do
     resources :closet_items, only: [:create, :destroy]

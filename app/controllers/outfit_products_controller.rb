@@ -1,6 +1,6 @@
 class OutfitProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_outfit, except: [:destroy]
+  before_action :set_outfit, except: [:destroy, :update]
   before_action :set_product, only: [:create]
 
   # POST /outfits/:outfit_id/outfit_products
@@ -24,7 +24,16 @@ class OutfitProductsController < ApplicationController
     end
   end
 
+  def update
+    @outfit_product = OutfitProduct.find(params[:id])
+    @outfit_product.update(outfit_product_params)
+  end
+
   private
+
+  def outfit_product_params
+    params.require(:outfit_product).permit(:product_id)
+  end
 
   def set_outfit
     @outfit = current_user.outfits.find(params[:outfit_id])

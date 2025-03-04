@@ -1,5 +1,5 @@
 class OutfitsController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @outfits = current_user.outfits
@@ -39,23 +39,19 @@ class OutfitsController < ApplicationController
   def create_from_products
     @outfit = Outfit.new(outfit_params)
     @outfit.user = current_user  # Associate the user
-
     # Create outfit_products for the selected products
     top_product = Product.find(params[:outfit][:top]) if params[:outfit][:top].present?
-  bottom_product = Product.find(params[:outfit][:bottom]) if params[:outfit][:bottom].present?
-  shoe_product = Product.find(params[:outfit][:shoe]) if params[:outfit][:shoe].present?
-
+    bottom_product = Product.find(params[:outfit][:bottom]) if params[:outfit][:bottom].present?
+    shoe_product = Product.find(params[:outfit][:shoe]) if params[:outfit][:shoe].present?
     if @outfit.save
       OutfitProduct.create!(outfit: @outfit, product: top_product) if top_product
       OutfitProduct.create!(outfit: @outfit, product: bottom_product) if bottom_product
       OutfitProduct.create!(outfit: @outfit, product: shoe_product) if shoe_product
-
       redirect_to @outfit, notice: 'Outfit created successfully!'
     else
       render :new_from_products, status: :unprocessable_entity
     end
   end
-
 
   def destroy
     @outfit = Outfit.find(params[:id])
@@ -100,19 +96,15 @@ class OutfitsController < ApplicationController
     params.require(:outfit).permit(:photo, :name, :budget, :season, :style, :gender)
   end
 
-
   def filtered_products(product_type)
     products = Product.where(product_type: product_type)
-
     # Apply filter if applicable
     if params[:season].present?
       products = products.where("season LIKE ?", "%#{params[:season]}%")
     end
-
     if params[:style].present?
       products = products.where(style: params[:style])
     end
-
     if params[:gender].present?
       products = products.where(gender: params[:gender])
     end

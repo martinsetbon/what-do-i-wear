@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect"];
+  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice"];
 
   connect() {
     // Ensure all product data is passed correctly into the controller
@@ -14,6 +14,7 @@ export default class extends Controller {
     } else {
       console.error("No filtered products available.");
     }
+    this.updateTotalPrice();
   }
 
   applyFilters() {
@@ -44,6 +45,7 @@ export default class extends Controller {
 
     // Update the product image with the first filtered product (if any)
     this.updateProductImage();
+    this.updateTotalPrice();
   }
 
   cycleProductImage(event) {
@@ -61,6 +63,8 @@ export default class extends Controller {
     // Update the image and hidden field with the next product
     this.productImageTarget.src = nextProduct.image;
     this.productFieldTarget.value = nextProduct.id;
+    this.productPriceTarget.textContent = nextProduct.price;
+    this.updateTotalPrice();
   }
 
   updateProductImage() {
@@ -68,6 +72,17 @@ export default class extends Controller {
       const firstProduct = this.filteredProducts[0]; // Use the first filtered product
       this.productImageTarget.src = firstProduct.image;
       this.productFieldTarget.value = firstProduct.id;
+      this.productPriceTarget.textContent = firstProduct.price;
     }
+    this.updateTotalPrice();
+  }
+
+  updateTotalPrice() {
+    const topPrice = parseFloat(document.querySelector('[data-filter-part="top"] span[data-filter-target="productPrice"]')?.textContent || 0);
+    const bottomPrice = parseFloat(document.querySelector('[data-filter-part="bottom"] span[data-filter-target="productPrice"]')?.textContent || 0);
+    const shoePrice = parseFloat(document.querySelector('[data-filter-part="shoes"] span[data-filter-target="productPrice"]')?.textContent || 0);
+
+    const totalPrice = topPrice + bottomPrice + shoePrice;
+    document.getElementById("total-price").textContent = totalPrice.toFixed(2);
   }
 }
