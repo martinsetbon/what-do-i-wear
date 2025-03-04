@@ -63,7 +63,7 @@ men_products_trousers.first(3).each do |trouser|
   product.save!
   product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
   unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
+    # puts "Skipping #{product.name} - image attachment failed."
     product.destroy
     next
   end
@@ -99,7 +99,7 @@ men_products_shorts.first(3).each do |short|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
+    # puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
     product.destroy if product.persisted?
     next
   end
@@ -128,7 +128,7 @@ men_products_boots.first(3).each do |boot|
   product.description = product.generate_description
   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
     # Handle network/image fetching errors
-    puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
+    # puts "Skipping #{product.name} - Image URL is not accessible (#{e.message})."
     product.destroy if product.persisted?
     next
   end

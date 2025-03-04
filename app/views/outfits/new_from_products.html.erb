@@ -25,13 +25,13 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <div>
+        <%# <div>
           <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-top">
             <option value="">All Genders</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-        </div>
+        </div> %>
       </div>
       <!-- Product Image for Top -->
       <div class="product-group">
@@ -64,13 +64,13 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <div>
+        <%# <div>
           <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-bottom">
             <option value="">All Genders</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-        </div>
+        </div> %>
       </div>
       <!-- Product Image for Bottom -->
       <div class="product-group">
@@ -103,13 +103,13 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <div>
-          <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-shoes">
+        <%# <div> %>
+          <%# <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-shoes">
             <option value="">All Genders</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-        </div>
+        </div> %>
       </div>
       <!-- Product Image for Shoes -->
       <div class="product-group">
@@ -121,7 +121,7 @@
     </div>
 
     <!-- Total Price Display -->
-      <h2 class="text-center">Total Price: $<span id="total-price">0</span></h2>
+      <h2 class="text-center">Total Price:   <span id="total-price">0</span></h2>
     <!-- Outfit Name Field -->
     <div class="form-group">
       <%= f.label :name, "Outfit Name" %>

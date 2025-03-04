@@ -84,10 +84,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_03_061850) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
     t.string "season"
     t.string "style"
     t.string "gender"
+    t.text "description"
     t.vector "embedding", limit: 1536
   end
 
