@@ -1,121 +1,130 @@
 .outfit-show {
-  color: white;
-  min-height: 100vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 60px;
-  background: url('background_closet.jpg') no-repeat center center;
-  background-size: cover;
+  /* Basic layout for the page */
+  color: white; /* Text color for general content */
+  min-height: 100vh; /* Ensures the container takes at least the full viewport height */
+  text-align: center; /* Center-aligns text content */
+  display: flex; /* Enables flexbox layout */
+  flex-direction: column; /* Stacks items vertically */
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically */
+  padding-bottom: 60px; /* Adds space at the bottom */
+  background: url('background_closet.jpg') no-repeat center center; /* Background image setup */
+  background-size: cover; /* Ensures the background image covers the entire area */
+  font-family: 'Poppins', sans-serif; /* Applies the 'Poppins' font globally to all text */
 
+  /* Title styling */
   h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.8));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 2rem; /* Increases the font size */
+    font-weight: 700; /* Makes the text bold */
+    text-transform: uppercase; /* Makes the text uppercase */
+    letter-spacing: 2px; /* Adds spacing between letters */
+    margin-bottom: 1rem; /* Adds space below the title */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.8)); /* Gradient background */
+    -webkit-background-clip: text; /* Clips the background to the text */
+    -webkit-text-fill-color: transparent; /* Makes the text color transparent, allowing the background gradient to show */
   }
 
+  /* Layout for the products displayed */
   .outfit-products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; // Reduced gap to make it more compact
+    display: flex; /* Uses flexbox for layout */
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: center; /* Centers the items horizontally */
+    gap: 20px; /* Adds space between items */
   }
 
+  /* Styling for each product card */
   .outfit-product-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    box-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2);
-    width: 160px; // Smaller card size
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: rgba(255, 255, 255, 0.1); /* Slight white background with transparency */
+    border-radius: 12px; /* Rounds the corners of the card */
+    box-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2); /* Adds a subtle shadow effect */
+    width: 160px; /* Sets a fixed width for each product card */
+    padding: 8px; /* Adds padding inside the card */
+    display: flex; /* Uses flexbox layout inside the card */
+    flex-direction: column; /* Stacks the card contents vertically */
+    align-items: center; /* Centers the card content horizontally */
 
+    /* Styling for the product image */
     img {
-      border-radius: 8px;
-      transition: transform 0.2s ease-in-out;
-      max-width: 140px;
-      height: 140px;
-      display: block;
-      margin: 0 auto;
+      border-radius: 8px; /* Rounds the corners of the image */
+      transition: transform 0.2s ease-in-out; /* Adds a smooth transition for the hover effect */
+      max-width: 140px; /* Limits the image width */
+      height: 140px; /* Sets a fixed height for the image */
+      display: block; /* Ensures the image is displayed as a block */
+      margin: 0 auto; /* Centers the image horizontally */
 
+      /* Hover effect for the image */
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.05); /* Slightly enlarges the image when hovered */
       }
     }
 
+    /* Product name inside the card */
     .product-name {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      font-family: 'Poppins', sans-serif;
+      margin-top: 6px; /* Adds space above the product name */
+      font-size: 0.9rem; /* Sets the font size */
+      font-weight: bold; /* Makes the product name bold */
     }
 
+    /* Styling for the product price */
     .product-price {
-      font-size: 0.8rem;
-      color: #ccc;
+      font-size: 0.8rem; /* Sets a smaller font size for the price */
+      color: #ccc; /* Uses a light grey color for the price */
     }
   }
 
+  /* Styling for the total price displayed at the bottom */
   .total-price {
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    box-shadow: 0px 3px 8px rgba(91, 54, 54, 0.2);
-    text-align: center;
-    display: inline-block;
-    margin-top: 12px;
+    font-size: 1rem; /* Sets the font size */
+    font-weight: bold; /* Makes the total price bold */
+    color: white; /* Sets the text color to white */
+    background: rgba(255, 255, 255, 0.1); /* Slight white background with transparency */
+    padding: 0.5rem 1rem; /* Adds padding inside the total price container */
+    border-radius: 8px; /* Rounds the corners */
+    box-shadow: 0px 3px 8px rgba(91, 54, 54, 0.2); /* Adds a shadow effect */
+    text-align: center; /* Centers the text inside */
+    display: inline-block; /* Makes the container fit the text and not take full width */
+    margin-top: 12px; /* Adds space above the total price */
   }
 
+  /* Back button container */
   .back-button {
-    margin-top: 12px;
+    margin-top: 12px; /* Adds space above the back button */
 
+    /* Styling for the back button */
     .btn-back {
-      display: inline-block;
-      background-color: white;
-      color: black;
-      font-weight: bold;
-      font-family: 'Poppins', sans-serif;
-      border-radius: 25px;
-      padding: 0.5rem 1.5rem;
-      text-decoration: none;
-      font-size: 0.9rem;
+      display: inline-block; /* Makes the button inline */
+      background-color: white; /* Sets the background to white */
+      color: black; /* Sets the text color to black */
+      font-weight: bold; /* Makes the button text bold */
+      border-radius: 25px; /* Rounds the corners of the button */
+      padding: 0.5rem 1.5rem; /* Adds padding inside the button */
+      text-decoration: none; /* Removes underline from the link */
+      font-size: 0.9rem; /* Sets the font size for the button */
 
+      /* Hover effect for the back button */
       &:hover {
-        background-color: lightgray;
+        background-color: lightgray; /* Changes background color on hover */
       }
     }
   }
 
+  /* Remove button styling (for deleting items) */
   .btn-remove {
-    background: black;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
-    text-decoration: none;
+    background: black; /* Sets the button background to black */
+    color: white; /* Sets the text color to white */
+    font-size: 0.9rem; /* Sets the font size */
+    font-weight: 600; /* Sets the font weight */
+    border: none; /* Removes any borders */
+    cursor: pointer; /* Changes the cursor to a pointer when hovered */
+    padding: 8px 14px; /* Adds padding inside the button */
+    border-radius: 8px; /* Rounds the corners of the button */
+    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out; /* Smooth transition for background and scaling */
+    text-decoration: none; /* Removes underline from the link */
 
+    /* Hover effect for the remove button */
     &:hover {
-      background: rgba(50, 50, 50, 1);
-      transform: scale(1.05);
+      background: rgba(50, 50, 50, 1); /* Changes background color on hover */
+      transform: scale(1.05); /* Slightly enlarges the button when hovered */
     }
   }
-
 }
