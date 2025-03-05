@@ -56,8 +56,9 @@
   padding: 24px; /* Adds padding inside the card */
   border: 2px solid #DDDDDD;/* Adds a solid border around the card */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Horizontal and vertical shadow with some blur */
-  background: #cfd0d5; /* Solid background with #cfd0d5 */
-  background: rgba(255, 255, 255, 0.8); /* A separate layer of semi-transparent black */
+  background:url('7.jpg') ;/* Solid background marble */
+  background-size: cover;
+  background: rgba(255, 255, 255, 0.6); /* A separate layer of semi-transparent black */
   border-radius: 24px; /* Rounds the corners of the card */
   box-sizing: border-box; /* Ensures padding and border are included in the width/height calculation */
   position: relative; /* Positioning for any child elements */
