@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice"];
+  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice", "priceSelect"];
 
   connect() {
     // Ensure all product data is passed correctly into the controller
@@ -21,7 +21,7 @@ export default class extends Controller {
     // Get selected filter values
     const selectedSeason = this.seasonSelectTarget.value;
     const selectedStyle = this.styleSelectTarget.value;
-    const selectedGender = this.genderSelectTarget.value;
+    const selectedPriceRange = this.priceSelectTarget.value;
 
     // Filter products based on selected values
     this.filteredProducts = this.products.filter(product => {
@@ -32,8 +32,11 @@ export default class extends Controller {
       if (selectedStyle && product.style !== selectedStyle) {
         matches = false;
       }
-      if (selectedGender && product.gender !== selectedGender) {
-        matches = false;
+      if (selectedPriceRange) {
+        const [min, max] = selectedPriceRange === "1000+" ? [1000, Infinity] : selectedPriceRange.split("-").map(Number);
+        if (product.price < min || product.price > max) {
+          matches = false;
+        }
       }
       return matches;
     });
