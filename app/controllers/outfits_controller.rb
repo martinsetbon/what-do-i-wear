@@ -43,6 +43,13 @@ class OutfitsController < ApplicationController
     top_product = Product.find(params[:outfit][:top]) if params[:outfit][:top].present?
     bottom_product = Product.find(params[:outfit][:bottom]) if params[:outfit][:bottom].present?
     shoe_product = Product.find(params[:outfit][:shoe]) if params[:outfit][:shoe].present?
+
+    if top_product.nil? || bottom_product.nil? || shoe_product.nil?
+      flash[:error] = "Please select valid top, bottom, and shoe products."
+      render :new_from_products, status: :unprocessable_entity
+      return
+    end
+
     if @outfit.save
       OutfitProduct.create!(outfit: @outfit, product: top_product) if top_product
       OutfitProduct.create!(outfit: @outfit, product: bottom_product) if bottom_product
