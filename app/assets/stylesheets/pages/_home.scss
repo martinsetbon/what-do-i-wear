@@ -29,7 +29,7 @@
   white-space: normal;  /* Allow words to wrap */
   display: block;  /* Make the title block-level so each word is on a new line */
   position: absolute; /* Position the title absolutely */
-  top: 40px; /* Position it 40px from the top */
+  top: 60px; /* Position it 40px from the top */
   left: 40px; /* Position it 40px from the left */
   overflow: hidden; /* Hide overflow text */
 }
@@ -56,7 +56,7 @@
   animation: float 2s infinite ease-in-out; /* Animates the buttons */
   margin: 8px; /* Margin between buttons */
   position: relative; /* Allow positioning the buttons relative to their current position */
-  top: 24vh; /* Move buttons 5% of the viewport height lower */
+  top: 20vh; /* Move buttons 5% of the viewport height lower */
   background: #333333; /* Dark background for the buttons */
   color: white; /* White text */
 }
@@ -64,4 +64,9 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); } /* Initial and final position */
   50% { transform: translateY(-3px); } /* Move up slightly in the middle of the animation */
+}
+
+
+.home-logo{
+    width: 50px;
 }
