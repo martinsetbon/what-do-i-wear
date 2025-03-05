@@ -1,11 +1,11 @@
 <div class="outfit-form">
-<h1 class="text-center">Customized outfit</h1>
-<p class="text-center">Click on the image to change the cloth !</p>
-<%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
+  <h1 class="text-center">Customized outfit</h1>
+  <p class="text-center">Click on the image to change the cloth!</p>
+  <%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
     <!-- Filter for Top Products -->
     <h2 class="text-center">Select a Top</h2>
     <div class="section d-flex align-item-center justify-content-center"
-        data-controller="filter"
+         data-controller="filter"
          data-filter-part="top"
          data-filter-products="<%= @top_products.to_json %>">
       <div class="filter-box">
@@ -25,20 +25,21 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <%# <div>
-          <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-top">
-            <option value="">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div> %>
       </div>
       <!-- Product Image for Top -->
-      <div class="product-group">
-        <img data-filter-target="productImage" src="<%= @top_products.first.image %>" alt="<%= @top_products.first.name %>"
-             data-action="click->filter#cycleProductImage" class="new-product-image">
-        <%= hidden_field_tag 'outfit[top]', @top_products.first.id, data: { filter_target: "productField" } %>
-        <p>$<span data-filter-target="productPrice"><%= @top_products.first.price %></span></p>
+      <div class="d-flex align-items-center justify-content-between">
+        <button data-action="click->filter#back" class="btn btn-primary rounded-circle d-none me-3" data-filter-target="backButton"><i class="fa-solid fa-rotate-left"></i></button>
+        <div class="product-group">
+          <% if @top_products.present? && @top_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @top_products.first.image %>"
+               alt="<%= @top_products.first.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton" class="new-product-image">
+            <%= hidden_field_tag 'outfit[top]', @top_products.first.id, data: { filter_target: "productField" } %>
+            <p>$<span data-filter-target="productPrice"><%= @top_products.first.price %></span></p>
+          <% else %>
+            <p>No tops available.</p>
+          <% end %>
+        </div>
       </div>
     </div>
     <!-- Filter for Bottom Products -->
@@ -64,21 +65,22 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <%# <div>
-          <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-bottom">
-            <option value="">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div> %>
       </div>
       <!-- Product Image for Bottom -->
-      <div class="product-group">
-        <img data-filter-target="productImage" src="<%= @bottom_products.first.image %>" alt="<%= @bottom_products.first.name %>"
-             data-action="click->filter#cycleProductImage" class="new-product-image">
-        <%= hidden_field_tag 'outfit[bottom]', @bottom_products.first.id, data: { filter_target: "productField" } %>
-         <p>$<span data-filter-target="productPrice"><%= @bottom_products.first.price %></span></p>
-       </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <button data-action="click->filter#back" class="btn btn-primary rounded-circle d-none me-3" data-filter-target="backButton"><i class="fa-solid fa-rotate-left"></i></button>
+        <div class="product-group">
+          <% if @bottom_products.present? && @bottom_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @bottom_products.first.image %>"
+               alt="<%= @bottom_products.first.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton" class="new-product-image">
+            <%= hidden_field_tag 'outfit[bottom]', @bottom_products.first.id, data: { filter_target: "productField" } %>
+            <p>$<span data-filter-target="productPrice"><%= @bottom_products.first.price %></span></p>
+          <% else %>
+            <p>No bottoms available.</p>
+          <% end %>
+        </div>
+      </div>
     </div>
     <!-- Filter for Shoes -->
     <h2 class="text-center">Select Shoes</h2>
@@ -103,25 +105,25 @@
             <option value="formal">Formal</option>
           </select>
         </div>
-        <%# <div> %>
-          <%# <select data-action="change->filter#applyFilters" data-filter-target="genderSelect" id="gender-shoes">
-            <option value="">All Genders</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div> %>
       </div>
       <!-- Product Image for Shoes -->
-      <div class="product-group">
-        <img data-filter-target="productImage" src="<%= @shoe_products.first.image %>" alt="<%= @shoe_products.first.name %>"
-             data-action="click->filter#cycleProductImage" class="new-product-image">
-        <%= hidden_field_tag 'outfit[shoe]', @shoe_products.first.id, data: { filter_target: "productField" } %>
-         <p>$<span data-filter-target="productPrice"><%= @shoe_products.first.price %></span></p>
+      <div class="d-flex align-items-center justify-content-between">
+        <button data-action="click->filter#back" class="btn btn-primary rounded-circle d-none me-3" data-filter-target="backButton"><i class="fa-solid fa-rotate-left"></i></button>
+        <div class="product-group">
+          <% if @shoe_products.present? && @shoe_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @shoe_products.first.image %>"
+               alt="<%= @shoe_products.first.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton" class="new-product-image">
+            <%= hidden_field_tag 'outfit[shoe]', @shoe_products.first.id, data: { filter_target: "productField" } %>
+            <p>$<span data-filter-target="productPrice"><%= @shoe_products.first.price %></span></p>
+          <% else %>
+            <p>No shoes available.</p>
+          <% end %>
+        </div>
       </div>
     </div>
-
     <!-- Total Price Display -->
-      <h2 class="text-center">Total Price:   <span id="total-price">0</span></h2>
+    <h2 class="text-center">Total Price: <span id="total-price">0</span></h2>
     <!-- Outfit Name Field -->
     <div class="form-group">
       <%= f.label :name, "Outfit Name" %>
