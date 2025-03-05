@@ -1,9 +1,15 @@
 <%# Display the list of outfits for the current user %>
-<div class="closet-container text-center">
-<h1 class="index-title mt-5 mb-1">Your Outfits</h1>
+
+<%= turbo_stream_from "outfits" %> <!-- Turbo Stream to listen for changes to the outfits -->
+
+<div class="closet-container">
+<h1 class="your-outfits">Your Outfits</h1>
 
   <% if @outfits.empty? %>
-    <p>You have no outfits yet. <%= link_to 'Create a new outfit', new_outfit_path %></p>
+    <div class="outfit-card">
+    <p>You haven't made any outfits yet!</p>
+    <p><%= link_to 'Create Outfits', root_path %></p>
+    </div>
   <% else %>
     <div class="outfit-cards text-left" data-controller="product-swap">
       <% @outfits.each do |outfit| %>

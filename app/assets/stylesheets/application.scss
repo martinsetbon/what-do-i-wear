@@ -15,3 +15,22 @@
 @import "pages/new";
 @import "pages/new_from_products";
 @import "pages/devise_new";
+
+.home {
+  background-image: url('background_white_sweater.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.outfits.index {
+  background-image: url('6.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.outfits.new {
+  background-image: url('8.jpg');
+  background-size: cover;
+}

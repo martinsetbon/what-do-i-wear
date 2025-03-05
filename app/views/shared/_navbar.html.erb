@@ -1,20 +1,16 @@
 <nav class="navbar navbar-expand-lg fixed-bottom">
   <div class="container-fluid d-flex justify-content-around">
-
     <%= link_to root_path, class: "nav-link #{'active' if current_page?(root_path)} text-center" do %>
-      <i class="bi bi-house-door"></i>
+      <%= image_tag "what_to_wear_logo.png", alt: "App Logo", class: "logo-navbar" %>
       <div>Home</div>
     <% end %>
-
     <%= link_to outfits_path, class: "nav-link #{'active' if current_page?(outfits_path)} text-center" do %>
       <i class="bi bi-bag"></i>
       <div>Closet</div>
     <% end %>
-
     <%= link_to "#", class: "nav-link text-center" do %>
       <i class="bi bi-person"></i>
       <div>Profile</div>
     <% end %>
-
   </div>
 </nav>

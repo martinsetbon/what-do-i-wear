@@ -5,18 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Include Bootstrap CSS for general styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Include application's main CSS (application.scss) -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- Include JavaScript imports (e.g., for Turbo, Stimulus, etc.) -->
     <%= javascript_importmap_tags %>
+
+    <!-- Include Bootstrap Icons for additional icons in the UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- Meta tags for mobile web app capabilities -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-     <%= render 'shared/ios_pwa_links' %>
+
+    <!-- PWA-specific links -->
+    <%= render 'shared/ios_pwa_links' %>
   </head>
 
-<%= render "shared/flashes" %>
-<%= render "shared/navbar" %>
+  <!-- Body tag has dynamic classes based on controller and action -->
+  <body class="<%= controller.controller_name %> <%= controller.action_name %>">
 
+    <!-- Render any flash messages, such as success or error notifications -->
+    <%= render "shared/flashes" %>
+
+    <!-- Render the navigation bar -->
+    <%= render "shared/navbar" %>
+
+    <!-- Render the content of the page (this is where your page-specific content is inserted) -->
     <%= yield %>
   </body>
 </html>

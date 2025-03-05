@@ -5,10 +5,6 @@
   justify-content: center; /* Centers the content horizontally */
   align-items: center; /* Centers the content vertically */
   height: 100vh; /* Full height of the viewport */
-}
-
-.background-image-home {
-  background: url('background_white_sweater.jpg') center/cover no-repeat; /* Background image centered and covers the whole container */
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   display: flex; /* Flexbox layout */
@@ -33,7 +29,7 @@
   white-space: normal;  /* Allow words to wrap */
   display: block;  /* Make the title block-level so each word is on a new line */
   position: absolute; /* Position the title absolutely */
-  top: 40px; /* Position it 40px from the top */
+  top: 60px; /* Position it 40px from the top */
   left: 40px; /* Position it 40px from the left */
   overflow: hidden; /* Hide overflow text */
 }
@@ -44,8 +40,8 @@
 }
 
 .responsive-text {
-  position: absolute; /* Position the text absolutely */
-  bottom: 80px;  /* Position it near the top */
+  position: fixed;
+  bottom: 7vh;
   background-color: rgba(255, 255, 255, 0.2);  /* Light white background with transparency */
   color: #333333;  /* Dark text color for contrast */
   padding: 8px 16px;  /* Some padding around the text */
@@ -53,11 +49,14 @@
   border-radius: 8px;  /* Slight rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Soft shadow for the box */
   z-index: 10;  /* Ensure it's above other content */
+
 }
 
 .upload-btn, .generate-btn {
   animation: float 2s infinite ease-in-out; /* Animates the buttons */
   margin: 8px; /* Margin between buttons */
+  position: relative; /* Allow positioning the buttons relative to their current position */
+  top: 20vh; /* Move buttons 5% of the viewport height lower */
   background: #333333; /* Dark background for the buttons */
   color: white; /* White text */
 }
@@ -65,4 +64,9 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); } /* Initial and final position */
   50% { transform: translateY(-3px); } /* Move up slightly in the middle of the animation */
+}
+
+
+.home-logo{
+    width: 50px;
 }

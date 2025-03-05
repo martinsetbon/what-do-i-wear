@@ -8,6 +8,8 @@ class OutfitsController < ApplicationController
 
   def show
     @outfit = Outfit.find(params[:id])
+      # Ensure that the related products (OutfitProduct) are loaded
+    @outfit_products = @outfit.outfit_products.includes(:product)
   end
 
   def new
@@ -63,8 +65,9 @@ class OutfitsController < ApplicationController
   def destroy
     @outfit = Outfit.find(params[:id])
     @outfit.destroy
-    redirect_to outfits_path, notice: "Outfit deleted successfully."
+    redirect_to outfits_path, status: :see_other
   end
+
 
   def edit
     @outfit = Outfit.find(params[:id])
