@@ -37,8 +37,7 @@
       <p class="card-description"><%= outfit.gender&.capitalize %></p>
       </div>
 
-      <%= link_to outfit_path(outfit), method: :delete, data: { confirm: 'Are you sure you want to delete this outfit?' } do %>
-
+      <%= link_to outfit_path(outfit), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
       <i class="fa-regular fa-trash-can"></i>
     <% end %>
   </div>

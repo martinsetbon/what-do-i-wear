@@ -1,17 +1,5 @@
 <div class="outfit-show p-3">
   <h1>Outfit Details</h1>
-  <!-- Show buttons based on outfit pieces -->
-  <div class="outfit-actions">
-    <% if @outfit.outfit_products.empty? %>
-      <%= link_to "Add Pieces", new_from_products_outfits_path, class: "btn-add-pieces" %>
-    <% else %>
-      <% has_top = @outfit.outfit_products.any? { |product| product.product.category == 'Top' } %>
-      <% if has_top %>
-        <%= link_to "Add Bottom", new_from_products_outfits_path, class: "btn-add-bottom" %>
-        <%= link_to "Add Shoes", new_from_products_outfits_path, class: "btn-add-shoes" %>
-      <% end %>
-    <% end %>
-  </div>
   <div class="outfit-products">
     <% @outfit.outfit_products.each do |outfit_product| %>
       <div class="outfit-product-card">
