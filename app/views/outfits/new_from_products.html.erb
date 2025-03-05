@@ -1,7 +1,7 @@
 <div class="outfit-form">
 <h1 class="text-center">CUSTOMIZED OUTFIT</h1>
 <hr>
-<% <p class="text-center">Click on the image to change the cloth!</p> %>
+<%# <% <p class="text-center">Click on the image to change the cloth!</p> %>
 <%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
     <!-- Filter for Top Products -->
     <h2 class="text-center">Select a Top 👕</h2>
@@ -38,7 +38,7 @@
       </div>
       <!-- Product Image for Top -->
       <div class="d-flex align-items-center justify-content-between">
-        <button data-action="click->filter#back" class="btn btn-primary rounded-circle d-none me-3" data-filter-target="backButton"><i class="fa-solid fa-rotate-left"></i></button>
+        <button data-action="click->filter#back" class="btn btn-primary rounded-circle d-none me-3 button-back" data-filter-target="backButton"><i class="fa-solid fa-rotate-left"></i></button>
         <div class="product-group">
           <% if @top_products.present? && @top_products.first.present? %>
             <img data-filter-target="productImage" src="<%= @top_products.first.image %>"

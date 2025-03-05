@@ -1,6 +1,12 @@
 <div class="edit-page">
     <div class="upload-image-frame text-center">
-      <%= cl_image_tag(@outfit.photo.key, class: "img-fluid") %>
+      <%= cl_image_tag(@outfit.photo.key, class: "img-fluid", id: "image-to-enlarge") %>
+    </div>
+    <!-- Modal Structure -->
+    <div id="image-modal" class="modal">
+      <span class="close" id="modal-close">&times;</span>
+      <img class="modal-content" id="img-modal">
+      <div id="caption"></div>
     </div>
     <h1><%= @outfit.name %></h1>
     <hr>
