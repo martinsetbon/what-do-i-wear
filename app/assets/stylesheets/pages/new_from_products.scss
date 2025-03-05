@@ -16,7 +16,7 @@
     margin-top: 8px;
     font-weight: 800;
     letter-spacing: 3px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
     background: linear-gradient(90deg, #ffffff, #f0f0f0); /* Light gradient */
     -webkit-background-clip: text;
@@ -28,7 +28,7 @@
     text-align: center;
     color: #ffffff;
     margin-bottom: 12px;
-    font-weight: 700;
+    font-weight: 200;
     letter-spacing: 2px;
     font-family: 'Montserrat', sans-serif; /* Example font for h2 */
   }
@@ -168,6 +168,28 @@
     &:active {
       transform: scale(0.98);
       box-shadow: 0 2px 6px rgba(70, 160, 255, 0.7);
+    }
+  }
+
+  .button-back {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.3s;
+
+    // Hover effect
+    &:hover {
+      background-color: #0056b3;
+      transform: scale(1.1); // Slightly enlarge on hover
+    }
+
+    // Focus effect (optional)
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); // Blue glow on focus
     }
   }
 }
