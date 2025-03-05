@@ -1,7 +1,8 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice", "priceSelect"];
+
+  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice", "priceSelect","backButton"];
 
   connect() {
     // Ensure all product data is passed correctly into the controller
@@ -22,6 +23,7 @@ export default class extends Controller {
     const selectedSeason = this.seasonSelectTarget.value;
     const selectedStyle = this.styleSelectTarget.value;
     const selectedPriceRange = this.priceSelectTarget.value;
+    // const selectedGender = this.genderSelectTarget.value;
 
     // Filter products based on selected values
     this.filteredProducts = this.products.filter(product => {
@@ -32,12 +34,18 @@ export default class extends Controller {
       if (selectedStyle && product.style !== selectedStyle) {
         matches = false;
       }
+
       if (selectedPriceRange) {
         const [min, max] = selectedPriceRange === "1000+" ? [1000, Infinity] : selectedPriceRange.split("-").map(Number);
         if (product.price < min || product.price > max) {
           matches = false;
         }
       }
+
+      // if (selectedGender && product.gender !== selectedGender) {
+      //   matches = false;
+      // }
+
       return matches;
     });
 
@@ -86,6 +94,31 @@ export default class extends Controller {
     const shoePrice = parseFloat(document.querySelector('[data-filter-part="shoes"] span[data-filter-target="productPrice"]')?.textContent || 0);
 
     const totalPrice = topPrice + bottomPrice + shoePrice;
-    document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+    document.getElementById("total-price").textContent = `$${totalPrice.toFixed(2)}`;
+  }
+
+  back(event) {
+    event.preventDefault()
+    if (this.filteredProducts.length === 0) {
+      console.log("No filtered products available to go back.");
+      return;
+    }
+
+    const currentProductId = parseInt(this.productFieldTarget.value);
+    const currentIndex = this.filteredProducts.findIndex(product => product.id === currentProductId);
+
+    const previousIndex = (currentIndex - 1 + this.filteredProducts.length) % this.filteredProducts.length;
+    const previousProduct = this.filteredProducts[previousIndex];
+
+    this.productImageTarget.src = previousProduct.image;
+    this.productFieldTarget.value = previousProduct.id;
+    this.productPriceTarget.textContent = previousProduct.price;
+
+    this.updateTotalPrice();
+  }
+
+  toggleBackButton(event) {
+    // Show the back button when the image is clicked
+    this.backButtonTarget.classList.remove('d-none');
   }
 }
