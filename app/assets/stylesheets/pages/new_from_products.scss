@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@700&display=swap');
+
 
 .outfit-form {
   max-width: 500px;
@@ -7,33 +9,40 @@
   color: #e0e0e0;
   background: url('background_closet.jpg') no-repeat center center;
 
-  h1, h2 {
+  h1 {
+    text-align: center;
+    color: #000000; /* Black text color */
+    margin-bottom: 16px;
+    margin-top: 8px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff, #f0f0f0); /* Light gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8); /* White shadow for contrast */
+  }
+
+  h2 {
     text-align: center;
     color: #ffffff;
     margin-bottom: 12px;
     font-weight: 700;
     letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif; /* Example font for h2 */
   }
 
-  h1 {
-    margin-top: 2px;
-  }
-
-  p {
-    text-align: center;
-    font-size: 14px;
-    color: #b0b0b0;
-  }
 
   .section {
     display: flex;
-    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
     padding: 20px;
     background: rgba(41, 41, 41, 0.85);
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+    justify-content: space-between;
   }
 
   .filter-box {
@@ -53,11 +62,14 @@
       cursor: pointer;
       transition: all 0.3s;
       appearance: none;
+      width: 100%;
+      padding: 12px;
 
       &:hover, &:focus {
         background: #555;
         outline: none;
       }
+
     }
   }
 

@@ -1,9 +1,10 @@
 <div class="outfit-form">
-  <h1 class="text-center">Customized outfit</h1>
-  <p class="text-center">Click on the image to change the cloth!</p>
-  <%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
+<h1 class="text-center">CUSTOMIZED OUTFIT</h1>
+<hr>
+<% <p class="text-center">Click on the image to change the cloth!</p> %>
+<%= simple_form_for @outfit, url: create_from_products_outfits_path, method: :post, local: true do |f| %>
     <!-- Filter for Top Products -->
-    <h2 class="text-center">Select a Top</h2>
+    <h2 class="text-center">Select a Top 👕</h2>
     <div class="section d-flex align-item-center justify-content-center"
          data-controller="filter"
          data-filter-part="top"
@@ -25,6 +26,15 @@
             <option value="formal">Formal</option>
           </select>
         </div>
+        <div>
+          <select data-action="change->filter#applyFilters" data-filter-target="priceSelect" id="price-range">
+              <option value="">All Prices</option>
+              <option value="0-100">$0 - $100</option>
+              <option value="100-500">$100 - $500</option>
+              <option value="500-1000">$500 - $1000</option>
+              <option value="1000+">Over $1000</option>
+            </select>
+        </div>
       </div>
       <!-- Product Image for Top -->
       <div class="d-flex align-items-center justify-content-between">
@@ -43,7 +53,7 @@
       </div>
     </div>
     <!-- Filter for Bottom Products -->
-    <h2 class="text-center">Select a Bottom</h2>
+    <h2 class="text-center">Select a Bottom 👖</h2>
     <div class="section d-flex align-item-center justify-content-center"
          data-controller="filter"
          data-filter-part="bottom"
@@ -65,6 +75,16 @@
             <option value="formal">Formal</option>
           </select>
         </div>
+
+        <div>
+         <select data-action="change->filter#applyFilters" data-filter-target="priceSelect" id="price-range">
+            <option value="">All Prices</option>
+            <option value="0-100">$0 - $100</option>
+            <option value="100-500">$100 - $500</option>
+            <option value="500-1000">$500 - $1000</option>
+            <option value="1000+">Over $1000</option>
+          </select>
+      </div>
       </div>
       <!-- Product Image for Bottom -->
       <div class="d-flex align-items-center justify-content-between">
@@ -83,7 +103,7 @@
       </div>
     </div>
     <!-- Filter for Shoes -->
-    <h2 class="text-center">Select Shoes</h2>
+    <h2 class="text-center">Select Shoes 👟</h2>
     <div class="section d-flex align-item-center justify-content-center"
          data-controller="filter"
          data-filter-part="shoes"
@@ -105,6 +125,15 @@
             <option value="formal">Formal</option>
           </select>
         </div>
+       <div>
+         <select data-action="change->filter#applyFilters" data-filter-target="priceSelect" id="price-range">
+            <option value="">All Prices</option>
+            <option value="0-100">$0 - $100</option>
+            <option value="100-500">$100 - $500</option>
+            <option value="500-1000">$500 - $1000</option>
+            <option value="1000+">Over $1000</option>
+          </select>
+      </div>
       </div>
       <!-- Product Image for Shoes -->
       <div class="d-flex align-items-center justify-content-between">
