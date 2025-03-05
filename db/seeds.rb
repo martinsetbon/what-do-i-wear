@@ -7,8 +7,6 @@ Outfit.destroy_all
 puts "Outfits deleted"
 ClosetItem.destroy_all
 puts "Closet items deleted"
-Product.destroy_all
-puts "Products deleted"
 User.destroy_all
 puts "Users deleted"
 
@@ -20,11 +18,18 @@ users = User.create!([
 ])
 puts "Users created"
 
-url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
-men_products_jeans = ClothesScraperService.scrape_clothes(url)
 
+
+# url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx?sort=4"
+men_products_jeans = ClothesScraperService.scrape_clothes(url)
 men_products_jeans.each do |jean|
   begin
+  if Product.find_by(name: jean[:name])
+    p "Product already seeded"
+    next
+  end
+
   file = URI.open(jean[:image])
   product = Product.new(jean)
   product.product_type = "bottom"
@@ -51,10 +56,15 @@ end
 
 
 
-url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx?sort=4"
 men_products_trousers = ClothesScraperService.scrape_clothes(url)
 men_products_trousers.each do |trouser|
   begin
+    if Product.find_by(name: trouser[:name])
+      p "Product already seeded"
+      next
+    end
   file = URI.open(trouser[:image])
   product = Product.new(trouser)
   product.product_type = "bottom"
@@ -80,10 +90,15 @@ p "#{product.name} has been created"
 end
 
 
-url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx?sort=4"
 men_products_shorts = ClothesScraperService.scrape_clothes(url)
 men_products_shorts.each do |short|
   begin
+    if Product.find_by(name: short[:name])
+      p "Product already seeded"
+      next
+    end
   file = URI.open(short[:image])
   product = Product.new(short)
   product.product_type = "bottom"
@@ -111,10 +126,15 @@ p "#{product.name} has been created"
 end
 
 
-url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx?sort=4"
 men_products_boots = ClothesScraperService.scrape_clothes(url)
 men_products_boots.each do |boot|
   begin
+    if Product.find_by(name: boot[:name])
+      p "Product already seeded"
+      next
+    end
   file = URI.open(boot[:image])
   product = Product.new(boot)
   product.product_type = "shoes"
@@ -142,10 +162,15 @@ p "#{product.name} has been created"
 end
 
 
-url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx?sort=4"
 men_products_sneakers = ClothesScraperService.scrape_clothes(url)
 men_products_sneakers.each do |sneaker|
   begin
+    if Product.find_by(name: sneaker[:name])
+      p "Product already seeded"
+      next
+    end
     file = URI.open(sneaker[:image])
     product = Product.new(sneaker)
     product.product_type = "shoes"
@@ -172,10 +197,15 @@ end
 
 
 
-url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx?sort=4"
 men_products_oxfords = ClothesScraperService.scrape_clothes(url)
 men_products_oxfords.each do |oxford|
   begin
+    if Product.find_by(name: oxford[:name])
+      p "Product already seeded"
+      next
+    end
   file = URI.open(oxford[:image])
   product = Product.new(oxford)
   product.product_type = "shoes"
@@ -203,10 +233,15 @@ end
 
 
 
-url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx?sort=4"
 men_products_jackets = ClothesScraperService.scrape_clothes(url)
 men_products_jackets.each do |jacket|
   begin
+    if Product.find_by(name: jacket[:name])
+      p "Product already seeded"
+      next
+    end
     file = URI.open(jacket[:image])
     product = Product.new(jacket)
     product.product_type = "top"
@@ -232,10 +267,15 @@ p "#{product.name} has been created"
 end
 
 
-url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx?sort=4"
 men_products_tshirts = ClothesScraperService.scrape_clothes(url)
 men_products_tshirts.each do |tshirt|
   begin
+    if Product.find_by(name: tshirt[:name])
+      p "Product already seeded"
+      next
+    end
     file = URI.open(tshirt[:image])
     product = Product.new(tshirt)
     product.product_type = "top"
@@ -261,10 +301,15 @@ men_products_tshirts.each do |tshirt|
 end
 
 
-url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
+url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx?sort=4"
 men_products_sweaters = ClothesScraperService.scrape_clothes(url)
 men_products_sweaters.each do |sweater|
   begin
+    if Product.find_by(name: sweater[:name])
+      p "Product already seeded"
+      next
+    end
     file = URI.open(sweater[:image])
     product = Product.new(sweater)
     product.product_type = "top"
