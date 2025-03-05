@@ -2,38 +2,33 @@
   <h1>Outfit Details</h1>
 
   <!-- Show buttons based on outfit pieces -->
-  <div class="outfit-actions">
-    <% if @outfit.outfit_products.empty? %>
-      <%= link_to "Add Pieces", new_from_products_outfits_path, class: "btn-add-pieces" %>
-    <% else %>
-      <% has_top = @outfit.outfit_products.any? { |product| product.product.category == 'Top' } %>
+  <div class="outfit-products-row">
+    <% ['top', 'bottom', 'shoes'].each_with_index do |type, index| %>
+      <% product = @outfit.outfit_products[index] %>
 
-      <% if has_top %>
-        <%= link_to "Add Bottom", new_from_products_outfits_path, class: "btn-add-bottom" %>
-        <%= link_to "Add Shoes", new_from_products_outfits_path, class: "btn-add-shoes" %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="outfit-products">
-    <% @outfit.outfit_products.each do |outfit_product| %>
       <div class="outfit-product-card">
-        <%= link_to outfit_product.product.link_url, target: "_blank" do %>
-          <%= image_tag(outfit_product.product.image, alt: outfit_product.product.name) %>
+        <% if product %>
+          <!-- If product exists, display the product -->
+          <%= link_to product.product.link_url, target: "_blank" do %>
+            <%= image_tag(product.product.image, alt: product.product.name) %>
+          <% end %>
+          <p class="product-name"><%= product.product.name %></p>
+          <p class="product-price">$<%= product.product.price %></p>
+          <!-- Delete button -->
+          <div class="delete-button-container">
+            <%= link_to "Remove", outfit_product_path(product),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                class: "btn-remove" %>
+          </div>
+        <% else %>
+          <!-- If product is missing, show a button to add the product -->
+          <%= link_to "Add #{type.capitalize}", new_from_products_outfits_path(type: type), class: "btn-add-piece" %>
         <% end %>
-        <p class="product-name"><%= outfit_product.product.name %></p>
-        <p class="product-price">$<%= outfit_product.product.price %></p>
-        <!-- Delete button -->
-        <div class="delete-button-container">
-          <%= link_to "Remove", outfit_product_path(outfit_product),
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
-              class: "btn-remove"
-            %>
-        </div>
       </div>
     <% end %>
   </div>
 
+  <!-- Total Price -->
   <p class="total-price">Total: <%= number_to_currency(@outfit.products.sum(&:price), unit: '$', precision: 0) %></p>
 
   <!-- Back Button -->
