@@ -236,7 +236,7 @@ puts "Users created"
 # url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
 url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx?sort=4"
 men_products_jackets = ClothesScraperService.scrape_clothes(url)
-men_products_jackets.first(10)each do |jacket|
+men_products_jackets.first(10).each do |jacket|
   begin
     if Product.find_by(name: jacket[:name])
       p "Product already seeded"
