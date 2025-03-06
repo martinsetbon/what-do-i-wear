@@ -21,214 +21,214 @@ puts "Users created"
 
 
 # url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx?sort=4"
-men_products_jeans = ClothesScraperService.scrape_clothes(url)
-men_products_jeans.each do |jean|
-  begin
-  if Product.find_by(name: jean[:name])
-    p "Product already seeded"
-    next
-  end
+# url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx?sort=4"
+# men_products_jeans = ClothesScraperService.scrape_clothes(url)
+# men_products_jeans.each do |jean|
+#   begin
+#   if Product.find_by(name: jean[:name])
+#     p "Product already seeded"
+#     next
+#   end
 
-  file = URI.open(jean[:image])
-  product = Product.new(jean)
-  product.product_type = "bottom"
-  product.season = "winter, fall, spring"
-  product.style = "casual"
-  product.gender = "male"
-  product.save!
-  product.photo.attach(io: file, filename: "#{product.name}.jpg", content_type: "image/jpg")
-  unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
-
-
-
-# url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx?sort=4"
-men_products_trousers = ClothesScraperService.scrape_clothes(url)
-men_products_trousers.each do |trouser|
-  begin
-    if Product.find_by(name: trouser[:name])
-      p "Product already seeded"
-      next
-    end
-  file = URI.open(trouser[:image])
-  product = Product.new(trouser)
-  product.product_type = "bottom"
-  product.season = "summer, spring"
-  product.style = "casual"
-  product.gender = "male"
-  product.save!
-  product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-  unless product.photo.attached?
-    # puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
-
-
-# url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx?sort=4"
-men_products_shorts = ClothesScraperService.scrape_clothes(url)
-men_products_shorts.each do |short|
-  begin
-    if Product.find_by(name: short[:name])
-      p "Product already seeded"
-      next
-    end
-  file = URI.open(short[:image])
-  product = Product.new(short)
-  product.product_type = "bottom"
-  product.season = "summer"
-  product.style = "casual"
-  product.gender = "male"
-  product.save!
-  product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-  unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
-
-
-# url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx?sort=4"
-men_products_boots = ClothesScraperService.scrape_clothes(url)
-men_products_boots.each do |boot|
-  begin
-    if Product.find_by(name: boot[:name])
-      p "Product already seeded"
-      next
-    end
-  file = URI.open(boot[:image])
-  product = Product.new(boot)
-  product.product_type = "shoes"
-  product.season = "winter"
-  product.style = "casual"
-  product.gender = "male"
-  product.save!
-  product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-  unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
-
-
-# url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx?sort=4"
-men_products_sneakers = ClothesScraperService.scrape_clothes(url)
-men_products_sneakers.each do |sneaker|
-  begin
-    if Product.find_by(name: sneaker[:name])
-      p "Product already seeded"
-      next
-    end
-    file = URI.open(sneaker[:image])
-    product = Product.new(sneaker)
-    product.product_type = "shoes"
-    product.season = "fall, summer, spring"
-    product.style = "casual"
-    product.gender = "male"
-    product.save!
-    product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-  unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
+#   file = URI.open(jean[:image])
+#   product = Product.new(jean)
+#   product.product_type = "bottom"
+#   product.season = "winter, fall, spring"
+#   product.style = "casual"
+#   product.gender = "male"
+#   product.save!
+#   product.photo.attach(io: file, filename: "#{product.name}.jpg", content_type: "image/jpg")
+#   unless product.photo.attached?
+#     puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
 
 
 
-# url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx?sort=4"
-men_products_oxfords = ClothesScraperService.scrape_clothes(url)
-men_products_oxfords.each do |oxford|
-  begin
-    if Product.find_by(name: oxford[:name])
-      p "Product already seeded"
-      next
-    end
-  file = URI.open(oxford[:image])
-  product = Product.new(oxford)
-  product.product_type = "shoes"
-  product.season = "fall, summer, spring"
-  product.style = "formal"
-  product.gender = "male"
-  product.save!
-  product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-  unless product.photo.attached?
-    puts "Skipping #{product.name} - image attachment failed."
-    product.destroy
-    next
-  end
-  product.description = product.generate_description
-  rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
+# # url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/trousers-2/items.aspx?sort=4"
+# men_products_trousers = ClothesScraperService.scrape_clothes(url)
+# men_products_trousers.each do |trouser|
+#   begin
+#     if Product.find_by(name: trouser[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#   file = URI.open(trouser[:image])
+#   product = Product.new(trouser)
+#   product.product_type = "bottom"
+#   product.season = "summer, spring"
+#   product.style = "casual"
+#   product.gender = "male"
+#   product.save!
+#   product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#   unless product.photo.attached?
+#     # puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
+
+
+# # url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/shorts-2/items.aspx?sort=4"
+# men_products_shorts = ClothesScraperService.scrape_clothes(url)
+# men_products_shorts.each do |short|
+#   begin
+#     if Product.find_by(name: short[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#   file = URI.open(short[:image])
+#   product = Product.new(short)
+#   product.product_type = "bottom"
+#   product.season = "summer"
+#   product.style = "casual"
+#   product.gender = "male"
+#   product.save!
+#   product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#   unless product.photo.attached?
+#     puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
+
+
+# # url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/boots-2/items.aspx?sort=4"
+# men_products_boots = ClothesScraperService.scrape_clothes(url)
+# men_products_boots.each do |boot|
+#   begin
+#     if Product.find_by(name: boot[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#   file = URI.open(boot[:image])
+#   product = Product.new(boot)
+#   product.product_type = "shoes"
+#   product.season = "winter"
+#   product.style = "casual"
+#   product.gender = "male"
+#   product.save!
+#   product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#   unless product.photo.attached?
+#     puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
+
+
+# # url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/trainers-2/items.aspx?sort=4"
+# men_products_sneakers = ClothesScraperService.scrape_clothes(url)
+# men_products_sneakers.each do |sneaker|
+#   begin
+#     if Product.find_by(name: sneaker[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#     file = URI.open(sneaker[:image])
+#     product = Product.new(sneaker)
+#     product.product_type = "shoes"
+#     product.season = "fall, summer, spring"
+#     product.style = "casual"
+#     product.gender = "male"
+#     product.save!
+#     product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#   unless product.photo.attached?
+#     puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
+
+
+
+# # url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/oxfords-2/items.aspx?sort=4"
+# men_products_oxfords = ClothesScraperService.scrape_clothes(url)
+# men_products_oxfords.each do |oxford|
+#   begin
+#     if Product.find_by(name: oxford[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#   file = URI.open(oxford[:image])
+#   product = Product.new(oxford)
+#   product.product_type = "shoes"
+#   product.season = "fall, summer, spring"
+#   product.style = "formal"
+#   product.gender = "male"
+#   product.save!
+#   product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#   unless product.photo.attached?
+#     puts "Skipping #{product.name} - image attachment failed."
+#     product.destroy
+#     next
+#   end
+#   product.description = product.generate_description
+#   rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
 
 
 
@@ -236,7 +236,7 @@ end
 # url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
 url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx?sort=4"
 men_products_jackets = ClothesScraperService.scrape_clothes(url)
-men_products_jackets.each do |jacket|
+men_products_jackets.first(10)each do |jacket|
   begin
     if Product.find_by(name: jacket[:name])
       p "Product already seeded"
@@ -270,7 +270,7 @@ end
 # url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
 url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx?sort=4"
 men_products_tshirts = ClothesScraperService.scrape_clothes(url)
-men_products_tshirts.each do |tshirt|
+men_products_tshirts.first(10).each do |tshirt|
   begin
     if Product.find_by(name: tshirt[:name])
       p "Product already seeded"
@@ -304,7 +304,7 @@ end
 # url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
 url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx?sort=4"
 men_products_sweaters = ClothesScraperService.scrape_clothes(url)
-men_products_sweaters.each do |sweater|
+men_products_sweaters.first(10).each do |sweater|
   begin
     if Product.find_by(name: sweater[:name])
       p "Product already seeded"
