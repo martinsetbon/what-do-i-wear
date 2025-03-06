@@ -40,8 +40,7 @@
 }
 
 .responsive-text {
-  position: fixed;
-  bottom: 7vh;
+  margin-top: 250px;
   background-color: rgba(255, 255, 255, 0.2);  /* Light white background with transparency */
   color: #333333;  /* Dark text color for contrast */
   padding: 8px 16px;  /* Some padding around the text */
@@ -53,8 +52,7 @@
 }
 
 .upload-btn, .generate-btn {
-  animation: float 2s infinite ease-in-out; /* Animates the buttons */
-  margin: 8px; /* Margin between buttons */
+  animation: float 2s infinite ease-in-out; /* Animates the buttons */ /* Margin between buttons */
   position: relative; /* Allow positioning the buttons relative to their current position */
   top: 20vh; /* Move buttons 5% of the viewport height lower */
   background: #333333; /* Dark background for the buttons */
