@@ -19,8 +19,7 @@ users = User.create!([
 puts "Users created"
 
 
-
-# url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
+# # url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx"
 # url = "https://www.farfetch.com/shopping/men/denim-2/items.aspx?sort=4"
 # men_products_jeans = ClothesScraperService.scrape_clothes(url)
 # men_products_jeans.each do |jean|
@@ -304,7 +303,7 @@ end
 # url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
 url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx?sort=4"
 men_products_sweaters = ClothesScraperService.scrape_clothes(url)
-men_products_sweaters.first(10).each do |sweater|
+men_products_sweaters.each do |sweater|
   begin
     if Product.find_by(name: sweater[:name])
       p "Product already seeded"
