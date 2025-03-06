@@ -1,16 +1,39 @@
 require "open-uri"
+require "json"
 
 # Destroy existing records to avoid duplication
 OutfitProduct.destroy_all
-puts "Outfit products deleted"
+# puts "Outfit products deleted"
 Outfit.destroy_all
-puts "Outfits deleted"
+# puts "Outfits deleted"
 ClosetItem.destroy_all
-puts "Closet items deleted"
+# puts "Closet items deleted"
 User.destroy_all
-puts "Users deleted"
+# puts "Users deleted"
 
-# Create some users
+# Seeding from products.json
+puts "Retrieving products from DB"
+ExportDatabase.export
+
+puts "Cleaning products"
+Product.destroy_all
+
+filepath = "#{Rails.root}/db/products.json"
+
+serialized_products = File.read(filepath)
+
+data = JSON.parse(serialized_products)
+
+data["products"].each do |attributes|
+  attributes.delete("id")
+  attributes.delete("created_at")
+  attributes.delete("updated_at")
+
+  product = Product.create!(attributes)
+  puts "#{product.name} created"
+end
+
+# # Create some users
 users = User.create!([
   { email: 'user1@example.com', password: 'password123' },
   { email: 'user2@example.com', password: 'password123' },
@@ -234,71 +257,71 @@ puts "Users created"
 
 
 # url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx?sort=4"
-men_products_jackets = ClothesScraperService.scrape_clothes(url)
-men_products_jackets.first(10).each do |jacket|
-  begin
-    if Product.find_by(name: jacket[:name])
-      p "Product already seeded"
-      next
-    end
-    file = URI.open(jacket[:image])
-    product = Product.new(jacket)
-    product.product_type = "top"
-    product.season = "fall, winter"
-    product.style = "casual"
-    product.gender = "male"
-    product.save!
-    product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-    unless product.photo.attached?
-      puts "Skipping #{product.name} - image attachment failed."
-      product.destroy
-      next
-    end
-    product.description = product.generate_description
-    rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-    # Handle network/image fetching errors
-    puts "Skipping - Image is not accessible."
-    product.destroy if product && product.persisted?
-    next
-  end
-product.save!
-p "#{product.name} has been created"
-end
+# url = "https://www.farfetch.com/shopping/men/jackets-2/items.aspx?sort=4"
+# men_products_jackets = ClothesScraperService.scrape_clothes(url)
+# men_products_jackets.first(10).each do |jacket|
+#   begin
+#     if Product.find_by(name: jacket[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#     file = URI.open(jacket[:image])
+#     product = Product.new(jacket)
+#     product.product_type = "top"
+#     product.season = "fall, winter"
+#     product.style = "casual"
+#     product.gender = "male"
+#     product.save!
+#     product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#     unless product.photo.attached?
+#       puts "Skipping #{product.name} - image attachment failed."
+#       product.destroy
+#       next
+#     end
+#     product.description = product.generate_description
+#     rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#     # Handle network/image fetching errors
+#     puts "Skipping - Image is not accessible."
+#     product.destroy if product && product.persisted?
+#     next
+#   end
+# product.save!
+# p "#{product.name} has been created"
+# end
 
 
-# url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
-url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx?sort=4"
-men_products_tshirts = ClothesScraperService.scrape_clothes(url)
-men_products_tshirts.first(10).each do |tshirt|
-  begin
-    if Product.find_by(name: tshirt[:name])
-      p "Product already seeded"
-      next
-    end
-    file = URI.open(tshirt[:image])
-    product = Product.new(tshirt)
-    product.product_type = "top"
-    product.season = "summer, spring"
-    product.style = "casual"
-    product.gender = "male"
-    product.save!
-    product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
-    unless product.photo.attached?
-      puts "Skipping #{product.name} - image attachment failed."
-      product.destroy
-      next
-    end
-    product.description = product.generate_description
-    rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
-      # Handle network/image fetching errors
-      puts "Skipping - Image is not accessible."
-      product.destroy if product && product.persisted?
-      next
-    end
-  product.save!
-  p "#{product.name} has been created"
-end
+# # url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx"
+# url = "https://www.farfetch.com/shopping/men/t-shirts-vests-2/items.aspx?sort=4"
+# men_products_tshirts = ClothesScraperService.scrape_clothes(url)
+# men_products_tshirts.first(10).each do |tshirt|
+#   begin
+#     if Product.find_by(name: tshirt[:name])
+#       p "Product already seeded"
+#       next
+#     end
+#     file = URI.open(tshirt[:image])
+#     product = Product.new(tshirt)
+#     product.product_type = "top"
+#     product.season = "summer, spring"
+#     product.style = "casual"
+#     product.gender = "male"
+#     product.save!
+#     product.photo.attach(io: file, filename: "#{product.name}.png", content_type: "image/png")
+#     unless product.photo.attached?
+#       puts "Skipping #{product.name} - image attachment failed."
+#       product.destroy
+#       next
+#     end
+#     product.description = product.generate_description
+#     rescue OpenURI::HTTPError, Net::OpenTimeout, Net::ReadTimeout => e
+#       # Handle network/image fetching errors
+#       puts "Skipping - Image is not accessible."
+#       product.destroy if product && product.persisted?
+#       next
+#     end
+#   product.save!
+#   p "#{product.name} has been created"
+# end
 
 
 # # url = "https://www.farfetch.com/shopping/men/sweaters-knitwear-2/items.aspx"
@@ -334,8 +357,23 @@ end
 # p "#{product.name} has been created"
 # end
 
+# Seeding from products.json
+# Product.destroy_all
 
+# filepath = "#{Rails.root}/db/products.json"
 
+# serialized_products = File.read(filepath)
+
+# data = JSON.parse(serialized_products)
+
+# data["products"].each do |attributes|
+#   attributes.delete("id")
+#   attributes.delete("created_at")
+#   attributes.delete("updated_at")
+
+#   product = Product.create!(attributes)
+#   puts "#{product.name} created"
+# end
 
 # # Now, assign products to users' closet items and outfits
 
@@ -364,6 +402,5 @@ User.all.each do |user|
     end
   end
 end
-
 
 puts "Seeds created successfully"

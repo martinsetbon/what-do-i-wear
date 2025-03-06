@@ -26,6 +26,8 @@ class Product < ApplicationRecord
   # private
 
   def set_embedding
+    return unless embedding.nil?
+    
     client = OpenAI::Client.new
     response = client.embeddings(
       parameters: {
