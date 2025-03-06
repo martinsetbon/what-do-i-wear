@@ -1,22 +1,23 @@
 <div class="home-container">
-    <!-- Title and Buttons Section -->
-    <div class="title-buttons-container">
-      <h1 id="home-title" class="title-home">
-        <span>WHAT</span>
-        <span>DO</span>
-        <span>I</span>
-        <span>WEAR</span>
-      </h1>
-      <!-- Fashion at Your Fingertips paragraph with wrapping -->
-      <!-- Buttons, centered -->
-      <div class="buttons-home">
-        <%= link_to new_outfit_path, class: "btn-home upload-btn", style: "text-decoration: none;" do %>
-          <i class="fa-solid fa-images"></i> Upload
-        <% end %>
-        <%= link_to new_from_products_outfits_path, class: "btn-home generate-btn", style: "text-decoration: none;" do %>
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
-        <% end %>
-      </div>
-      <p class="responsive-text"> Snap a Pic and Find the Fit. Use AI to Put Together Outfits. Build Your Style.</p>
+  <!-- Title and Buttons Section -->
+  <%= image_tag "what_to_wear_logo.png", alt: "App Logo", class: "home-logo mt-3" %>
+  <div class="title-buttons-container">
+    <h1 id="home-title" class="title-home">
+      <span>WHAT</span>
+      <span>DO</span>
+      <span>I</span>
+      <span>WEAR</span>
+    </h1>
+    <!-- Fashion at Your Fingertips paragraph with wrapping -->
+    <!-- Buttons, centered -->
+    <div class="buttons-home">
+      <%= link_to new_outfit_path, class: "btn-home upload-btn", style: "text-decoration: none;" do %>
+        <i class="fa-solid fa-images"></i> Upload
+      <% end %>
+      <%= link_to new_from_products_outfits_path, class: "btn-home generate-btn", style: "text-decoration: none;" do %>
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+      <% end %>
     </div>
+    <p class="responsive-text"> Snap a Pic and Find the Fit. Use AI to Put Together Outfits. Build Your Style.</p>
+  </div>
 </div>

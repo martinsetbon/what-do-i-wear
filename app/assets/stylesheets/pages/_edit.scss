@@ -1,53 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 .edit-page {
-  background: rgba(20, 20, 20, 0.85); /* Dark overlay for readability */
+  background: rgba(0, 0, 0, 0.85); /* Dark background with slight transparency for depth */
   text-align: center;
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  color: #fff; /* White text for contrast */
   padding: 40px 25px;
   max-width: 700px;
-  background: url('background_closet.jpg') no-repeat center center;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: url('dark_sky.jpg') no-repeat center center;
+  background-size: cover;
 
   h1 {
     font-size: 32px;
     font-weight: 700;
-    margin-top: 15px;
-    letter-spacing: 1.5px;
+    margin-top: 20px;
+    color: #fff; /* Keeping the text white for contrast */
     text-transform: capitalize;
-    color: #fff;
+    letter-spacing: 0.5px;
   }
 
   h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 12px;
-    letter-spacing: 1px;
-    color: #ddd;
-    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+    color: #ddd; /* Light gray for better readability */
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
   }
 
   hr {
-    width: 85%;
-    height: 2px;
-    background: #777;
-    margin: 15px auto;
+    width: 50%;
+    height: 1px;
+    background: #555; /* Darker line for better contrast */
+    margin: 20px auto;
     border: none;
   }
 }
 
-/* Upload Image Frame (Scoped to .edit-page) */
+/* Upload Image Frame */
 .edit-page .upload-image-frame {
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   overflow: hidden;
-  border: 1px solid #666;
-  border-radius: 20px;
+  border: 1px solid #444; /* Lighter border for a subtle effect */
+  border-radius: 12px;
   margin: 20px auto;
+  background: rgba(255, 255, 255, 0.2); /* Very slight background to make it blend well */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(34, 34, 34, 0.9);
   transition: transform 0.3s ease-in-out;
 
   img {
@@ -58,84 +61,130 @@
   }
 
   &:hover img {
-    transform: scale(0.98);
+    transform: scale(1.05);
   }
 }
 
-/* Buttons (Scoped to .edit-page) */
+/* Buttons */
 .edit-page .btn-primary {
-  background: linear-gradient(135deg, #666, #333);
+  background: #007bff;
   border: none;
-  padding: 14px 22px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: linear-gradient(135deg, #444, #222);
-    transform: scale(1.08);
-    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+    background: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
-/* Product Selection (Scoped to .edit-page) */
+/* Product Selection */
 .edit-page .product-option {
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
 .edit-page .product-option input:checked + .suggested-product-frame {
-  border: 3px solid #bbb;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-  transform: scale(1.08);
+  border: 1px solid #444; /* Lighter border */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Slight glow effect */
+  transform: scale(1.05);
 }
 
 .edit-page .suggested-product-frame {
   width: 140px;
   height: 140px;
-  border: 2px solid #555;
+  border: 1px solid #444; /* Reduced border thickness */
   padding: 10px;
-  border-radius: 12px;
-  transition: border 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: rgba(34, 34, 34, 0.85);
+  background: rgba(255, 255, 255, 0.1); /* Darker background for minimalism */
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
 .edit-page .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .edit-page .price-text {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
   text-align: center;
-  color: #bbb;
+  color: #bbb; /* Light gray for better readability */
 }
 
-/* Save Button (Scoped to .edit-page) */
+/* Save Button */
 .edit-page .save-btn {
-  background: linear-gradient(135deg, #777, #444);
+  background: #28a745;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   padding: 14px 24px;
-  border-radius: 10px;
+  border-radius: 8px;
   color: white;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .edit-page .save-btn:hover {
-  background: linear-gradient(135deg, #555, #222);
-  transform: scale(1.08);
-  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+  background: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+//full image
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  .modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  }
+
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.show-modal {
+  opacity: 1;
+  transform: scale(1);
 }
