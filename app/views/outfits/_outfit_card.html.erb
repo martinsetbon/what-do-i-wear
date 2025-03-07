@@ -30,9 +30,14 @@
       <div>
         <p class="card-description"><span id="total-price-<%= outfit.id %>"><%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></span></p>
       </div>
-      <div class="upload-image-frame-outfit-card text-center">
+
+      <% unless outfit.photo.key.nil? %>
+       <div class="upload-image-frame-outfit-card text-center">
         <%= cl_image_tag(outfit.photo.key, class: "img-fluid", id: "image-to-enlarge") %>
       </div>
+      <% end %>
+
+
       <%= link_to outfit_path(outfit), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
         <i class="fa-regular fa-trash-can"></i>
       <% end %>
