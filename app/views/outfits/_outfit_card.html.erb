@@ -36,8 +36,6 @@
         <%= cl_image_tag(outfit.photo.key, class: "img-fluid", id: "image-to-enlarge") %>
       </div>
       <% end %>
-
-
       <%= link_to outfit_path(outfit), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
         <i class="fa-regular fa-trash-can"></i>
       <% end %>
