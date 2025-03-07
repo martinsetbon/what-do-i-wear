@@ -1,0 +1,10 @@
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <% products.each_with_index do |product, index| %>
+      <div class="swiper-slide <%= "selected" if index.zero? %>"  data-action="click->swiper#setNewProduct" data-id="<%= product.id %>" data-product-type="<%= product.product_type %>" data-price="<%= product.price %>" >
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <p class="price">$<%= product.price.round %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

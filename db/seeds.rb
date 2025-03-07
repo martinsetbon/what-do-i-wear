@@ -377,30 +377,30 @@ puts "Users created"
 
 # # Now, assign products to users' closet items and outfits
 
-User.all.each do |user|
-  # Closet items: 1 random item from each type
-  %w(top bottom shoes).each do |type|
-    product = Product.where(product_type: type).sample
-    ClosetItem.create!(user: user, product: product)
-  end
+# User.all.each do |user|
+#   # Closet items: 1 random item from each type
+#   %w(top bottom shoes).each do |type|
+#     product = Product.where(product_type: type).sample
+#     ClosetItem.create!(user: user, product: product)
+#   end
 
-  # Create outfits for each user
-  2.times do  # Create 2 outfits per user
-    outfit = Outfit.create!(
-      user: user,
-      name: Faker::Lorem.words(number: 2).join(' '),
-      budget: rand(1000..5000),
-      season: %w(summer fall winter spring).sample,
-      style: %w(casual formal).sample,
-      gender: %w(male female unisex).sample
-    )
+#   # Create outfits for each user
+#   2.times do  # Create 2 outfits per user
+#     outfit = Outfit.create!(
+#       user: user,
+#       name: Faker::Lorem.words(number: 2).join(' '),
+#       budget: rand(1000..5000),
+#       season: %w(summer fall winter spring).sample,
+#       style: %w(casual formal).sample,
+#       gender: %w(male female unisex).sample
+#     )
 
-    # Add 1 random product per type to the outfit
-    %w(top bottom shoes).each do |type|
-      product = Product.where(product_type: type).sample
-      OutfitProduct.create!(outfit: outfit, product: product)
-    end
-  end
-end
+#     # Add 1 random product per type to the outfit
+#     %w(top bottom shoes).each do |type|
+#       product = Product.where(product_type: type).sample
+#       OutfitProduct.create!(outfit: outfit, product: product)
+#     end
+#   end
+# end
 
 puts "Seeds created successfully"
