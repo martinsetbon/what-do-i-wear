@@ -1,0 +1,12 @@
+<%= simple_form_for(@outfit, html: {data: {controller: 'swiper', swiper_top_price_value: @outfit.top.product.price, swiper_bottom_price_value: @outfit.bottom.product.price, swiper_shoes_price_value: @outfit.shoes.product.price }}) do |f| %>
+  <%= render "products/swiper", products: @top_products, outfit: @outfit %>
+  <%= render "products/swiper", products: @bottom_products, outfit: @outfit %>
+  <%= render "products/swiper", products: @shoe_products, outfit: @outfit %>
+  <%= hidden_field_tag 'outfit[top]', @outfit.top.product.id, data: { swiper_target: "topInput" } %>
+  <%= hidden_field_tag 'outfit[bottom]', @outfit.bottom.product.id, data: { swiper_target: "bottomInput" } %>
+  <%= hidden_field_tag 'outfit[shoe]', @outfit.shoes.product.id, data: { swiper_target: "shoesInput" } %>
+
+  <p>Total Price: $ <span data-swiper-target="total"><%= @outfit.products.sum(&:price).round %></span></p>
+
+  <%= f.submit "Update Outfit", class: "submit-btn primary" %>
+<% end %>

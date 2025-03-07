@@ -9,3 +9,4 @@ pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "stimulus", to: "stimulus.min.js", preload: true
 pin "sortablejs" # @1.15.6
+pin "swiper/bundle", to: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'

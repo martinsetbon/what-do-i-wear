@@ -49,20 +49,20 @@
   }
 
   // Form submission handling with loader and submit disabling
-  document.querySelector('form').addEventListener('submit', function(event) {
-    // Prevent form submission until the animation completes (or set timeout)
-    event.preventDefault();
+  // document.querySelector('form').addEventListener('submit', function(event) {
+  //   // Prevent form submission until the animation completes (or set timeout)
+  //   event.preventDefault();
 
-    // Show the loader
-    document.getElementById('loader-container').style.display = 'block';
+  //   // Show the loader
+  //   document.getElementById('loader-container').style.display = 'block';
 
-    // Optionally, hide the submit button or disable it
-    document.querySelector('.btn').disabled = true;
+  //   // Optionally, hide the submit button or disable it
+  //   document.querySelector('.btn').disabled = true;
 
-    // Simulate form submission (replace with actual submission logic)
-    setTimeout(function() {
-      // Submit the form after 3 seconds (for example)
-      event.target.submit();
-    }, 3000); // Adjust this time as needed
-  });
+  //   // Simulate form submission (replace with actual submission logic)
+  //   setTimeout(function() {
+  //     // Submit the form after 3 seconds (for example)
+  //     event.target.submit();
+  //   }, 3000); // Adjust this time as needed
+  // });
 </script>

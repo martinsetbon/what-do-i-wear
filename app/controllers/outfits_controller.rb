@@ -18,6 +18,18 @@ class OutfitsController < ApplicationController
     @shoe_products = @outfit.nearest_shoes
   end
 
+  def change
+    @outfit = Outfit.find(params[:id])
+      # Ensure that the related products (OutfitProduct) are loaded
+    @outfit_products = @outfit.outfit_products.includes(:product)
+    # @top_products = Product.where(product_type: 'top')
+    # @bottom_products = Product.where(product_type: 'bottom')
+    # @shoe_products = Product.where(product_type: 'shoes')
+    @top_products = @outfit.nearest_tops.reject { |product| @outfit.products.include? product }.unshift(@outfit.top.product)
+    @bottom_products = @outfit.nearest_bottoms.reject { |product| @outfit.products.include? product }.unshift(@outfit.bottom.product)
+    @shoe_products = @outfit.nearest_shoes.reject { |product| @outfit.products.include? product }.unshift(@outfit.shoes.product)
+  end
+
   def new
     @outfit = Outfit.new
     # Fetch products by type

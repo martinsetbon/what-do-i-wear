@@ -7,6 +7,7 @@
   </div>
 
 
+
   <div class="outfit-products-row display-mode">
     <% ['top', 'bottom', 'shoes'].each do |part| %>
       <%# Based on product_type, pick the right products list %>
@@ -44,6 +45,7 @@
   <div class="border-bottom border-white">
    <h2 class="text-center total-price">Total Price: <span id="total-price" data-edit-outfit-target="totalPrice"><%= number_to_currency(@outfit.sum) %></span></h2>
 </div>
+<%= link_to "Edit", change_outfit_path(@outfit)  %>
  <%= link_to "Edit my outfit", "#", class: "btn btn-primary text-white rounded-4 mt-3", data: { controller: "edit-button", action: "click->edit-outfit#toggleEdit click->edit-button#toggle", edit_button_target: "editButton" } %>
   <!-- Total Price Display -->
   <!-- Back to Outfits Button -->
