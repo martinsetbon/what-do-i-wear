@@ -7,6 +7,9 @@ class Product < ApplicationRecord
   has_many :closet_items
   has_many :users, through: :closet_items
   has_one_attached :photo
+  scope :top, -> { where(product_type: "top")}
+  scope :bottom, -> { where(product_type: "bottom")}
+  scope :shoes, -> { where(product_type: "shoes")}
 
   validates :name, :price, :product_type, :image, :url, :season, :style, :gender, presence: true
   validates :product_type, inclusion: { in: %w(top bottom shoes accessories headwear), message: "%{value} is not a valid type" }
@@ -26,6 +29,8 @@ class Product < ApplicationRecord
   # private
 
   def set_embedding
+    return unless embedding.nil?
+    
     client = OpenAI::Client.new
     response = client.embeddings(
       parameters: {

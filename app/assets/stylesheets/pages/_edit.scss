@@ -92,9 +92,9 @@
 }
 
 .edit-page .product-option input:checked + .suggested-product-frame {
-  border: 1px solid #444; /* Lighter border */
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Slight glow effect */
-  transform: scale(1.05);
+  border: 2px solid #3578e5; /* Lighter border *//* Slight glow effect */
+  transform: scale(1.20);
+  transition: 0.3s;
 }
 
 .edit-page .suggested-product-frame {

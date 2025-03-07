@@ -10,6 +10,12 @@ class OutfitsController < ApplicationController
     @outfit = Outfit.find(params[:id])
       # Ensure that the related products (OutfitProduct) are loaded
     @outfit_products = @outfit.outfit_products.includes(:product)
+    # @top_products = Product.where(product_type: 'top')
+    # @bottom_products = Product.where(product_type: 'bottom')
+    # @shoe_products = Product.where(product_type: 'shoes')
+    @top_products = @outfit.nearest_tops
+    @bottom_products = @outfit.nearest_bottoms
+    @shoe_products = @outfit.nearest_shoes
   end
 
   def new
@@ -56,7 +62,7 @@ class OutfitsController < ApplicationController
       OutfitProduct.create!(outfit: @outfit, product: top_product) if top_product
       OutfitProduct.create!(outfit: @outfit, product: bottom_product) if bottom_product
       OutfitProduct.create!(outfit: @outfit, product: shoe_product) if shoe_product
-      redirect_to @outfit, notice: 'Outfit created successfully!'
+      redirect_to outfit_path(@outfit), notice: 'Outfit created successfully!'
     else
       render :new_from_products, status: :unprocessable_entity
     end
@@ -73,15 +79,15 @@ class OutfitsController < ApplicationController
     @outfit = Outfit.find(params[:id])
     @outfit_product = OutfitProduct.new
     # Fetch products by type
-    @top_products = Product.where(product_type: 'top')
+    @top_products = @outfit.nearest_tops
     tops =  @outfit.nearest_tops
     @top_choice1 = tops.first
     @top_choice2 = tops.second
-    @bottom_products = Product.where(product_type: 'bottom')
+    @bottom_products = @outfit.nearest_bottoms
     bottoms = @outfit.nearest_bottoms
     @bottom_choice1 = bottoms.first
     @bottom_choice2 = bottoms.second
-    @shoe_products = Product.where(product_type: 'shoes')
+    @shoe_products = @outfit.nearest_shoes
     shoes = @outfit.nearest_shoes
     @shoe_choice1 = shoes.first
     @shoe_choice2 = shoes.second
@@ -91,15 +97,18 @@ class OutfitsController < ApplicationController
   def update
 
     @outfit = Outfit.find(params[:id])
-    @top_product = Product.find(params[:top])
-    @outfit_product_top = OutfitProduct.create(outfit: @outfit, product: @top_product)
-    @bottom_product = Product.find(params[:bottom])
-    @outfit_product_bottom = OutfitProduct.create(outfit: @outfit, product: @bottom_product)
-    @shoe_product = Product.find(params[:shoe])
-    @outfit_product_shoe = OutfitProduct.create(outfit: @outfit, product: @shoe_product)
+
+    @outfit.outfit_products.destroy_all
+    @top_product = Product.find(params[:outfit][:top])
+    @outfit_product_top = OutfitProduct.create!(outfit: @outfit, product: @top_product)
+
+    @bottom_product = Product.find(params[:outfit][:bottom])
+    @outfit_product_bottom = OutfitProduct.create!(outfit: @outfit, product: @bottom_product)
+    @shoe_product = Product.find(params[:outfit][:shoe])
+    @outfit_product_shoe = OutfitProduct.create!(outfit: @outfit, product: @shoe_product)
 
     if @outfit.update(outfit_params)
-      redirect_to outfits_path
+      redirect_to outfit_path(@outfit), notice: 'Outfit updated successfully!'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -109,7 +118,7 @@ class OutfitsController < ApplicationController
 
   # Only allow the photo parameter in the outfit_params
   def outfit_params
-    params.require(:outfit).permit(:photo, :name, :budget, :season, :style, :gender)
+    params.require(:outfit).permit(:photo, :name, :budget, :season, :style, :gender, outfit:[:top, :bottom, :shoe])
   end
 
   def filtered_products(product_type)

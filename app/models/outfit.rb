@@ -1,6 +1,6 @@
 class Outfit < ApplicationRecord
   # after_create :generate_embedding
-  attr_accessor :top, :bottom, :shoe
+  # attr_accessor :top, :bottom, :shoe
   belongs_to :user
   has_one_attached :photo
   has_many :outfit_products, dependent: :destroy
@@ -9,6 +9,7 @@ class Outfit < ApplicationRecord
   # Optional fields
   validates :name, presence: true
   # validates :photo, presence: { message: "can't be blank. Please upload a photo." }
+  # validate :limit_products
   validates :budget, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :season, inclusion: { in: %w(summer fall winter spring), message: "%{value} is not a valid season" }, allow_nil: true
   validates :style, inclusion: { in: %w(casual formal), message: "%{value} is not a valid style" }, allow_nil: true
@@ -58,21 +59,21 @@ class Outfit < ApplicationRecord
     return Product.nearest_neighbors(
         :embedding, top_embedding,
         distance: "euclidean"
-      ).first(2)
+      ).top.limit(10)
   end
 
   def nearest_bottoms
     return Product.nearest_neighbors(
         :embedding, bottom_embedding,
         distance: "euclidean"
-      ).first(2)
+      ).bottom.limit(10)
   end
 
   def nearest_shoes
     return Product.nearest_neighbors(
         :embedding, shoes_embedding,
         distance: "euclidean"
-      ).first(2)
+      ).shoes.limit(10)
   end
 
   def top
@@ -90,4 +91,12 @@ class Outfit < ApplicationRecord
   def sum
     self.products.sum(&:price)
   end
+
+  private
+
+# def limit_products
+#   if outfit_products.size > 3
+#     errors.add(:outfit_product, "you can only attach 3 products to an outfit")
+#   end
+# end
 end

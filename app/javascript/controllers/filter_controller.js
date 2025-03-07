@@ -1,124 +1,101 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-
-  static targets = ["productImage", "productField", "seasonSelect", "styleSelect", "genderSelect", "productPrice", "priceSelect","backButton"];
+  static targets = ["productImage", "productField", "productPrice", "backButton", "editButton"];
 
   connect() {
-    // Ensure all product data is passed correctly into the controller
-    this.products = JSON.parse(this.element.dataset.filterProducts);
-    this.filteredProducts = this.products;  // Initially all products are shown
-
-    // Check if products are available
-    if (this.filteredProducts.length > 0) {
-      this.updateProductImage();  // Initial product
-    } else {
-      console.error("No filtered products available.");
+    // Get the products JSON from the data attribute
+   const data = this.element.dataset.filterProducts;
+  if (data && data !== "null" && data !== "") {
+    try {
+      this.products = JSON.parse(data);
+    } catch (e) {
+      console.error("Error parsing products JSON:", e);
+      this.products = [];
     }
-    this.updateTotalPrice();
+  } else {
+    console.error("No products data found on element.");
+    this.products = [];
   }
-
-  applyFilters() {
-    // Get selected filter values
-    const selectedSeason = this.seasonSelectTarget.value;
-    const selectedStyle = this.styleSelectTarget.value;
-    const selectedPriceRange = this.priceSelectTarget.value;
-    // const selectedGender = this.genderSelectTarget.value;
-
-    // Filter products based on selected values
-    this.filteredProducts = this.products.filter(product => {
-      let matches = true;
-      if (selectedSeason && !product.season.includes(selectedSeason)) {
-        matches = false;
-      }
-      if (selectedStyle && product.style !== selectedStyle) {
-        matches = false;
-      }
-
-      if (selectedPriceRange) {
-        const [min, max] = selectedPriceRange === "1000+" ? [1000, Infinity] : selectedPriceRange.split("-").map(Number);
-        if (product.price < min || product.price > max) {
-          matches = false;
-        }
-      }
-
-      // if (selectedGender && product.gender !== selectedGender) {
-      //   matches = false;
-      // }
-
-      return matches;
-    });
-
-    // If no products match, show a warning
-    if (this.filteredProducts.length === 0) {
-      console.log("No products match your filters.");
-    }
-
-    // Update the product image with the first filtered product (if any)
-    this.updateProductImage();
-    this.updateTotalPrice();
-  }
+  // Safely initialize filteredProducts as a copy of products.
+  this.filteredProducts = this.products.slice();
+  const currentProductId = parseInt(this.productFieldTarget.value);
+  const currentIndex = this.filteredProducts.findIndex(product => product.id === currentProductId);
+  this.updateProductImage(currentIndex);
+  this.updateTotalPrice();
+}
 
   cycleProductImage(event) {
-    if (this.filteredProducts.length === 0) {
+    event.preventDefault();
+    // Defensive check: if filteredProducts is null or empty, do nothing.
+    if (!this.filteredProducts || this.filteredProducts.length === 0) {
       console.log("No filtered products available to cycle through.");
       return;
     }
-
     const currentProductId = parseInt(this.productFieldTarget.value);
     const currentIndex = this.filteredProducts.findIndex(product => product.id === currentProductId);
-    const nextIndex = (currentIndex + 1) % this.filteredProducts.length; // Loop back to the first product if at the last one
-
+    const nextIndex = (currentIndex + 1) % this.filteredProducts.length;
     const nextProduct = this.filteredProducts[nextIndex];
-
-    // Update the image and hidden field with the next product
+    // Update the display with the next product
     this.productImageTarget.src = nextProduct.image;
+    this.productImageTarget.alt = nextProduct.name;
     this.productFieldTarget.value = nextProduct.id;
     this.productPriceTarget.textContent = nextProduct.price;
     this.updateTotalPrice();
   }
 
-  updateProductImage() {
-    if (this.filteredProducts.length > 0) {
-      const firstProduct = this.filteredProducts[0]; // Use the first filtered product
-      this.productImageTarget.src = firstProduct.image;
-      this.productFieldTarget.value = firstProduct.id;
-      this.productPriceTarget.textContent = firstProduct.price;
+  back(event) {
+    event.preventDefault();
+    if (!this.filteredProducts || this.filteredProducts.length === 0) {
+      console.log("No filtered products available to go back.");
+      return;
+    }
+    const currentProductId = parseInt(this.productFieldTarget.value);
+    const currentIndex = this.filteredProducts.findIndex(product => product.id === currentProductId);
+    const previousIndex = (currentIndex - 1 + this.filteredProducts.length) % this.filteredProducts.length;
+    const previousProduct = this.filteredProducts[previousIndex];
+    this.productImageTarget.src = previousProduct.image;
+    this.productImageTarget.alt = previousProduct.name;
+    this.productFieldTarget.value = previousProduct.id;
+    this.productPriceTarget.textContent = previousProduct.price;
+    this.updateTotalPrice();
+  }
+
+  updateProductImage(index = 0) {
+    if (this.filteredProducts && this.filteredProducts.length > 0) {
+      const product = this.filteredProducts[index];
+      this.productImageTarget.src = product.image;
+      this.productImageTarget.alt = product.name;
+      this.productFieldTarget.value = product.id;
+      this.productPriceTarget.textContent = product.price;
     }
     this.updateTotalPrice();
   }
 
   updateTotalPrice() {
-    const topPrice = parseFloat(document.querySelector('[data-filter-part="top"] span[data-filter-target="productPrice"]')?.textContent || 0);
-    const bottomPrice = parseFloat(document.querySelector('[data-filter-part="bottom"] span[data-filter-target="productPrice"]')?.textContent || 0);
-    const shoePrice = parseFloat(document.querySelector('[data-filter-part="shoes"] span[data-filter-target="productPrice"]')?.textContent || 0);
+    console.log(this.totalPriceTarget);
+    if (!this.hasTotalPriceTarget) return;
 
-    const totalPrice = topPrice + bottomPrice + shoePrice;
-    document.getElementById("total-price").textContent = `$${totalPrice.toFixed(2)}`;
+
+    let total = 0;
+    this.productPriceTargets.forEach(priceElement => {
+      total += parseFloat(priceElement.textContent.replace("$", "")) || 0;
+    });
+    console.log(total);
+
+    this.totalPriceTarget.textContent = `$${total.toFixed(2)}`;
   }
 
-  back(event) {
-    event.preventDefault()
-    if (this.filteredProducts.length === 0) {
-      console.log("No filtered products available to go back.");
-      return;
+  toggleEdit(event) {
+    event.preventDefault();
+    const displayMode = this.element.querySelector('.display-mode');
+    const editMode = this.element.querySelector('.edit-mode');
+    if (displayMode && editMode) {
+      displayMode.classList.toggle('d-none');
+      editMode.classList.toggle('d-none');
     }
-
-    const currentProductId = parseInt(this.productFieldTarget.value);
-    const currentIndex = this.filteredProducts.findIndex(product => product.id === currentProductId);
-
-    const previousIndex = (currentIndex - 1 + this.filteredProducts.length) % this.filteredProducts.length;
-    const previousProduct = this.filteredProducts[previousIndex];
-
-    this.productImageTarget.src = previousProduct.image;
-    this.productFieldTarget.value = previousProduct.id;
-    this.productPriceTarget.textContent = previousProduct.price;
-
-    this.updateTotalPrice();
-  }
-
-  toggleBackButton(event) {
-    // Show the back button when the image is clicked
-    this.backButtonTarget.classList.remove('d-none');
+    if (this.hasEditButtonTarget) {
+      this.editButtonTarget.classList.toggle('d-none');
+    }
   }
 }
