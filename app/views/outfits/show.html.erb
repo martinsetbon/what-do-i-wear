@@ -1,13 +1,10 @@
 <div class="outfit-show p-3" data-controller="edit-outfit">
   <h1><%= @outfit.name %></h1>
-    <h2>Outfit details</h2>
+  <h2>Outfit details</h2>
   <!-- Outfit Products Row -->
   <div class="edit-mode d-none">
     <%= render "products/form" %>
   </div>
-
-
-
   <div class="outfit-products-row display-mode">
     <% ['top', 'bottom', 'shoes'].each do |part| %>
       <%# Based on product_type, pick the right products list %>
@@ -18,7 +15,6 @@
          end %>
       <%# Find the current product for the part by checking the associated product's product_type %>
       <% current_product = @outfit.outfit_products.find { |op| op.product.product_type == part }&.product %>
-
       <div class="outfit-product-card">
         <!-- Display Mode -->
         <div class="display-mode">
@@ -29,7 +25,6 @@
             <p class="product-name"><%= current_product.name %></p>
             <p class="fs-6 text-white">$<span data-filter-target="productPrice"><%= current_product.price %></span></p>
             <div class="button-group">
-
               <%= link_to "Remove", outfit_product_path(current_product),
                     data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
                     class: "btn-remove" %>
@@ -43,10 +38,9 @@
     <% end %>
   </div>
   <div class="border-bottom border-white">
-   <h2 class="text-center total-price">Total Price: <span id="total-price" data-edit-outfit-target="totalPrice"><%= number_to_currency(@outfit.sum) %></span></h2>
-</div>
-<%= link_to "Edit", change_outfit_path(@outfit)  %>
- <%= link_to "Edit my outfit", "#", class: "btn btn-primary text-white rounded-4 mt-3", data: { controller: "edit-button", action: "click->edit-outfit#toggleEdit click->edit-button#toggle", edit_button_target: "editButton" } %>
+    <h2 class="text-center total-price">Total Price: <span id="total-price" data-edit-outfit-target="totalPrice"><%= number_to_currency(@outfit.sum) %></span></h2>
+  </div>
+  <%= link_to "Edit my outfit", change_outfit_path(@outfit), class: "btn btn-primary text-white rounded-4 mt-3" %>
   <!-- Total Price Display -->
   <!-- Back to Outfits Button -->
   <div class="back-button">

@@ -1,12 +1,24 @@
-<%= simple_form_for(@outfit, html: {data: {controller: 'swiper', swiper_top_price_value: @outfit.top.product.price, swiper_bottom_price_value: @outfit.bottom.product.price, swiper_shoes_price_value: @outfit.shoes.product.price }}) do |f| %>
-  <%= render "products/swiper", products: @top_products, outfit: @outfit %>
-  <%= render "products/swiper", products: @bottom_products, outfit: @outfit %>
-  <%= render "products/swiper", products: @shoe_products, outfit: @outfit %>
-  <%= hidden_field_tag 'outfit[top]', @outfit.top.product.id, data: { swiper_target: "topInput" } %>
-  <%= hidden_field_tag 'outfit[bottom]', @outfit.bottom.product.id, data: { swiper_target: "bottomInput" } %>
-  <%= hidden_field_tag 'outfit[shoe]', @outfit.shoes.product.id, data: { swiper_target: "shoesInput" } %>
-
-  <p>Total Price: $ <span data-swiper-target="total"><%= @outfit.products.sum(&:price).round %></span></p>
-
-  <%= f.submit "Update Outfit", class: "submit-btn primary" %>
-<% end %>
+<div class="change-container pb-3">
+  <h1 class="text-center text-white">EDIT MY OUTFIT</h1>
+  <%= simple_form_for(@outfit, html: {data: {controller: 'swiper', swiper_top_price_value: @outfit.top.product.price, swiper_bottom_price_value: @outfit.bottom.product.price, swiper_shoes_price_value: @outfit.shoes.product.price }}) do |f| %>
+    <p class="text-center text-white mt-3">Change Top 👕</p>
+    <%= render "products/swiper", products: @top_products, outfit: @outfit %>
+    <p class="text-white">Just swipe to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+    <hr>
+    <p class="text-center text-white mt-3">Change Bottom 👖</p>
+    <%= render "products/swiper", products: @bottom_products, outfit: @outfit %>
+    <p class="text-white">Just swipe to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+    <hr>
+    <p class="text-center text-white mt-3">Change Shoes 👟</p>
+    <%= render "products/swiper", products: @shoe_products, outfit: @outfit %>
+    <p class="text-white">Just swipe to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+    <hr>
+    <%= hidden_field_tag 'outfit[top]', @outfit.top.product.id, data: { swiper_target: "topInput" } %>
+    <%= hidden_field_tag 'outfit[bottom]', @outfit.bottom.product.id, data: { swiper_target: "bottomInput" } %>
+    <%= hidden_field_tag 'outfit[shoe]', @outfit.shoes.product.id, data: { swiper_target: "shoesInput" } %>
+    <h2 class="text-white text-center">Total Price: $ <span data-swiper-target="total"><%= @outfit.products.sum(&:price).round %></span></h2>
+    <div class="text-center">
+      <%= f.submit "Update Outfit", class: "update-outfit mb-3 mt-3" %>
+    </div>
+  <% end %>
+</div>

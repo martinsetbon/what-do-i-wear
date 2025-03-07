@@ -61,7 +61,7 @@
                data-action="click->filter#cycleProductImage click->filter#toggleBackButton click->edit-outfit#updateTotalPrice" class="new-product-image">
             <%= hidden_field_tag 'outfit[shoe]', @outfit.shoes.product.id, data: { filter_target: "productField" } %>
             <p class="text-white">$<span data-filter-target="productPrice"  data-edit-outfit-target="productPrice"><%= @outfit.shoes.product.price %></span></p>
-          <p class="text-white">Just tap to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+            <p class="text-white">Just swipe to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
           <% else %>
             <p>No shoes available.</p>
           <% end %>
@@ -70,7 +70,6 @@
     </div>
     <!-- Total Price Display -->
     <!-- Outfit Name Field -->
-
     <div class="form-group">
       <%= f.label :name, "Change outfit Name" %>
       <%= f.text_field :name, class: "form-control", placeholder: "Enter the name of your outfit", required: true %>

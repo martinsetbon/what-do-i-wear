@@ -1,6 +1,6 @@
 .swiper {
-  width: 240px;
-  height: 320px;
+  width: 220px;
+  height: 300px;
   margin-bottom: 1rem;
 
   .price {
@@ -34,6 +34,6 @@
   }
 
   &.selected {
-    box-shadow: 0 0 0 4px red;
+    box-shadow: 0 0 0 4px #3578e5;
   }
 }
