@@ -80,13 +80,14 @@
     text-align: center;
 
     img.new-product-image {
-      width: 160px;
       height: 160px;
       object-fit: cover;
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s;
       border: 2px solid #444;
+      background-color: white;
+      padding: 16px;
 
       &:hover {
         transform: scale(1.05);
@@ -97,12 +98,6 @@
       }
     }
 
-    p {
-      margin-top: 6px;
-      font-size: 17px;
-      font-weight: bold;
-      color: #f0f0f0;
-    }
   }
 
   #total-price {

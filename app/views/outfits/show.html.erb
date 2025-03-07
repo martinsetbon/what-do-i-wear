@@ -1,38 +1,53 @@
-<div class="outfit-show p-3">
-  <h1>Outfit Details</h1>
+<div class="outfit-show p-3" data-controller="edit-outfit">
+  <h1><%= @outfit.name %></h1>
+    <h2>Outfit details</h2>
+  <!-- Outfit Products Row -->
+  <div class="edit-mode d-none">
+    <%= render "products/form" %>
+  </div>
 
-  <!-- Show buttons based on outfit pieces -->
-  <div class="outfit-products-row">
-    <% ['top', 'bottom', 'shoes'].each_with_index do |type, index| %>
-      <% product = @outfit.outfit_products[index] %>
+
+  <div class="outfit-products-row display-mode">
+    <% ['top', 'bottom', 'shoes'].each do |part| %>
+      <%# Based on product_type, pick the right products list %>
+      <% products_data = case part
+           when "top" then @top_products
+           when "bottom" then @bottom_products
+           when "shoes" then @shoe_products
+         end %>
+      <%# Find the current product for the part by checking the associated product's product_type %>
+      <% current_product = @outfit.outfit_products.find { |op| op.product.product_type == part }&.product %>
 
       <div class="outfit-product-card">
-        <% if product %>
-          <!-- If product exists, display the product -->
-          <%= link_to product.product.link_url, target: "_blank" do %>
-            <%= image_tag(product.product.image, alt: product.product.name) %>
+        <!-- Display Mode -->
+        <div class="display-mode">
+          <% if current_product.present? %>
+            <%= link_to current_product.link_url, target: "_blank" do %>
+              <%= image_tag(current_product.image, alt: current_product.name, class: "product-image") %>
+            <% end %>
+            <p class="product-name"><%= current_product.name %></p>
+            <p class="fs-6 text-white">$<span data-filter-target="productPrice"><%= current_product.price %></span></p>
+            <div class="button-group">
+
+              <%= link_to "Remove", outfit_product_path(current_product),
+                    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                    class: "btn-remove" %>
+            </div>
+          <% else %>
+            <p>No product selected for <%= part.capitalize %>.</p>
+            <%= link_to "Add", "#", class: "btn-edit", data: { action: "click->filter#toggleEdit" } %>
           <% end %>
-          <p class="product-name"><%= product.product.name %></p>
-          <p class="product-price">$<%= product.product.price %></p>
-          <!-- Delete button -->
-          <div class="delete-button-container">
-            <%= link_to "Remove", outfit_product_path(product),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                class: "btn-remove" %>
-          </div>
-        <% else %>
-          <!-- If product is missing, show a button to add the product -->
-          <%= link_to "Add #{type.capitalize}", new_from_products_outfits_path(type: type), class: "btn-add-piece" %>
-        <% end %>
+        </div>
       </div>
     <% end %>
   </div>
-
-  <!-- Total Price -->
-  <p class="total-price">Total: <%= number_to_currency(@outfit.products.sum(&:price), unit: '$', precision: 0) %></p>
-
-  <!-- Back Button -->
+  <div class="border-bottom border-white">
+   <h2 class="text-center total-price">Total Price: <span id="total-price" data-edit-outfit-target="totalPrice"><%= number_to_currency(@outfit.sum) %></span></h2>
+</div>
+ <%= link_to "Edit my outfit", "#", class: "btn btn-primary text-white rounded-4 mt-3", data: { controller: "edit-button", action: "click->edit-outfit#toggleEdit click->edit-button#toggle", edit_button_target: "editButton" } %>
+  <!-- Total Price Display -->
+  <!-- Back to Outfits Button -->
   <div class="back-button">
-    <%= link_to "Back to Outfits", outfits_path, class: "btn-back" %>
+    <%= link_to "Back to my closet", outfits_path, class: "btn-back mb-3" %>
   </div>
 </div>

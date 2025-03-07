@@ -37,17 +37,17 @@
     background: rgba(255, 255, 255, 0.1); /* Slight white background with transparency */
     border-radius: 12px; /* Rounds the corners of the card */
     box-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2); /* Adds a subtle shadow effect */
-    width: 160px; /* Sets a fixed width for each product card */
     padding: 8px; /* Adds padding inside the card */
     display: flex; /* Uses flexbox layout inside the card */
     flex-direction: column; /* Stacks the card contents vertically */
     align-items: center; /* Centers the card content horizontally */
+    margin-top: 16px;
+    margin-bottom: 16px;
 
     /* Styling for the product image */
     img {
       border-radius: 8px; /* Rounds the corners of the image */
       transition: transform 0.2s ease-in-out; /* Adds a smooth transition for the hover effect */
-      max-width: 140px; /* Limits the image width */
       height: 140px; /* Sets a fixed height for the image */
       display: block; /* Ensures the image is displayed as a block */
       margin: 0 auto; /* Centers the image horizontally */
@@ -83,7 +83,6 @@
     box-shadow: 0px 3px 8px rgba(91, 54, 54, 0.2); /* Adds a shadow effect */
     text-align: center; /* Centers the text inside */
     display: inline-block; /* Makes the container fit the text and not take full width */
-    margin-top: 12px; /* Adds space above the total price */
   }
 
   /* Back button container */

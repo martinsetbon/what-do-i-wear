@@ -1,0 +1,83 @@
+<div class="outfit-form">
+  <h1 class="text-center">EDIT MY OUTFIT</h1>
+  <hr>
+  <%= simple_form_for @outfit do |f| %>
+    <!-- Filter for Top Products -->
+    <p class="text-center text-white">Change Top 👕</p>
+    <div class="section d-flex align-item-center justify-content-center"
+          data-controller="filter"
+         data-filter-part="top"
+         data-filter-products="<%= @top_products.to_json %>">
+      <!-- Product Image for Top -->
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="product-group">
+          <% if @top_products.present? && @top_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @top_products.first.image %>"
+               alt="<%= @outfit.top.product.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton click->edit-outfit#updateTotalPrice" class="new-product-image">
+            <%= hidden_field_tag 'outfit[top]', @outfit.top.product.id, data: { filter_target: "productField" } %>
+            <p class="text-white">$<span data-filter-target="productPrice" data-edit-outfit-target="productPrice"><%= @outfit.top.product.price %></span></p>
+            <p class="text-white">Just tap to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+          <% else %>
+            <p>No tops available.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Filter for Bottom Products -->
+    <p class="text-center text-white">Change Bottom 👖</p>
+    <div class="section d-flex align-item-center justify-content-center"
+         data-controller="filter"
+         data-filter-part="bottom"
+         data-filter-products="<%= @bottom_products.to_json %>">
+      <!-- Product Image for Bottom -->
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="product-group">
+          <% if @bottom_products.present? && @bottom_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @bottom_products.first.image %>"
+               alt="<%= @outfit.bottom.product.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton click->edit-outfit#updateTotalPrice" class="new-product-image">
+            <%= hidden_field_tag 'outfit[bottom]', @outfit.bottom.product.id, data: { filter_target: "productField" } %>
+            <p class="text-white">$<span data-filter-target="productPrice" data-edit-outfit-target="productPrice"><%= @outfit.bottom.product.price %></span></p>
+            <p class="text-white">Just tap to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+          <% else %>
+            <p>No bottoms available.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Filter for Shoes -->
+    <p class="text-center text-white">Change Shoes 👟</p>
+    <div class="section d-flex align-item-center justify-content-center"
+         data-controller="filter"
+         data-filter-part="shoes"
+         data-filter-products="<%= @shoe_products.to_json %>">
+      <!-- Product Image for Shoes -->
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="product-group">
+          <% if @shoe_products.present? && @shoe_products.first.present? %>
+            <img data-filter-target="productImage" src="<%= @shoe_products.first.image %>"
+               alt="<%= @outfit.shoes.product.name %>"
+               data-action="click->filter#cycleProductImage click->filter#toggleBackButton click->edit-outfit#updateTotalPrice" class="new-product-image">
+            <%= hidden_field_tag 'outfit[shoe]', @outfit.shoes.product.id, data: { filter_target: "productField" } %>
+            <p class="text-white">$<span data-filter-target="productPrice"  data-edit-outfit-target="productPrice"><%= @outfit.shoes.product.price %></span></p>
+          <p class="text-white">Just tap to find similar product <i class="fa-regular fa-hand-point-up"></i></p>
+          <% else %>
+            <p>No shoes available.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Total Price Display -->
+    <!-- Outfit Name Field -->
+
+    <div class="form-group">
+      <%= f.label :name, "Change outfit Name" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Enter the name of your outfit", required: true %>
+    </div>
+    <!-- Submit Button -->
+    <div class="form-group">
+      <%= f.submit "Update Outfit", class: "submit-btn primary" %>
+    </div>
+  </div>
+<% end %>

@@ -1,38 +1,41 @@
 <div class="outfit-card">
   <div class="container-card">
-    <div class="d-flex align-items-center justify-content-between">
-      <% if outfit.top %>
-        <div id="<%= outfit.top.id %>">
-          <div class="outfit-product-image" data-product-swap-target="top" id="<%= outfit.top.product.id %>">
-            <%= image_tag(outfit.top.product.image, class: "img-fluid", alt: outfit.top.product.name) %>
+    <p class="card-title"><%= outfit.name %></p>
+    <%= link_to outfit_path(outfit), class: "outfit-card-link" do %>
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <% if outfit.top %>
+          <div id="<%= outfit.top.id %>">
+            <div class="outfit-product-image" data-product-swap-target="top" id="<%= outfit.top.product.id %>">
+              <%= image_tag(outfit.top.product.image, class: "img-fluid", alt: outfit.top.product.name) %>
+            </div>
           </div>
-        </div>
-      <% end %>
-
-      <% if outfit.bottom %>
-        <div id="<%= outfit.bottom.id %>">
-          <div class="outfit-product-image" data-product-swap-target="bottom" id="<%= outfit.bottom.product.id %>">
-            <%= image_tag(outfit.bottom.product.image, class: "img-fluid", alt: outfit.bottom.product.name) %>
+        <% end %>
+        <% if outfit.bottom %>
+          <div id="<%= outfit.bottom.id %>">
+            <div class="outfit-product-image" data-product-swap-target="bottom" id="<%= outfit.bottom.product.id %>">
+              <%= image_tag(outfit.bottom.product.image, class: "img-fluid", alt: outfit.bottom.product.name) %>
+            </div>
           </div>
-        </div>
-      <% end %>
-
-      <% if outfit.shoes %>
-        <div id="<%= outfit.shoes.id %>">
-          <div class="outfit-product-image" data-product-swap-target="shoes" id="<%= outfit.shoes.product.id %>">
-            <%= image_tag(outfit.shoes.product.image, class: "img-fluid", alt: outfit.shoes.product.name) %>
+        <% end %>
+        <% if outfit.shoes %>
+          <div id="<%= outfit.shoes.id %>">
+            <div class="outfit-product-image" data-product-swap-target="shoes" id="<%= outfit.shoes.product.id %>">
+              <%= image_tag(outfit.shoes.product.image, class: "img-fluid", alt: outfit.shoes.product.name) %>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-
-        <p class="card-title"><%= outfit.name %></p>
-      <div class="d-flex justify-content-between">
+        <% end %>
+      </div>
+    <% end %>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
         <p class="card-description"><span id="total-price-<%= outfit.id %>"><%= number_to_currency(outfit.products.sum(&:price), {unit: '$', precision: 0}) %></span></p>
       </div>
-
+      <div class="upload-image-frame-outfit-card text-center">
+        <%= cl_image_tag(outfit.photo.key, class: "img-fluid", id: "image-to-enlarge") %>
+      </div>
       <%= link_to outfit_path(outfit), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-      <i class="fa-regular fa-trash-can"></i>
-    <% end %>
+        <i class="fa-regular fa-trash-can"></i>
+      <% end %>
+    </div>
   </div>
 </div>
