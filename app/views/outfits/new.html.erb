@@ -1,10 +1,11 @@
-<div class="d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 112px);">
+
+  <div class="d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 112px);">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
         <%= simple_form_for(@outfit) do |f| %>
           <!-- File upload for photo -->
           <div class="form-group">
-            <%= f.input :photo, as: :file, label: "Upload Photo", input_html: { class: "form-control" } %>
+            <%= f.input :photo, as: :file, label: "Upload Photo", input_html: { class: "form-control", onchange: "previewImage(event)" } %>
           </div>
           <!-- Outfit name field -->
           <div class="form-group">
@@ -23,10 +24,13 @@
             <%= f.button :submit, "Create Outfit", class: "btn btn-info rounded-pill" %>
           </div>
         <% end %>
+
+        <!-- Image preview -->
+        <img id="image-preview" style="display:none; max-width: 100%; margin-top: 20px;" />
       </div>
     </div>
   </div>
-</div>
+
 <script>
   // Function to preview the image when a file is selected
   function previewImage(event) {
@@ -43,4 +47,22 @@
       reader.readAsDataURL(file); // Read the image file
     }
   }
+
+  // Form submission handling with loader and submit disabling
+  document.querySelector('form').addEventListener('submit', function(event) {
+    // Prevent form submission until the animation completes (or set timeout)
+    event.preventDefault();
+
+    // Show the loader
+    document.getElementById('loader-container').style.display = 'block';
+
+    // Optionally, hide the submit button or disable it
+    document.querySelector('.btn').disabled = true;
+
+    // Simulate form submission (replace with actual submission logic)
+    setTimeout(function() {
+      // Submit the form after 3 seconds (for example)
+      event.target.submit();
+    }, 3000); // Adjust this time as needed
+  });
 </script>
